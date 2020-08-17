@@ -39,6 +39,16 @@ uint8 AUTN[16] = {
  0x6E, 0xA6, 0x46, 0x94, 0xE4, 0x7F, 0x55, 0xE9
 };
 
+/*
+* AK   = f5(K, RAND)
+* SQN  = AUTN[0:5] ^ AK
+* AMF  = AUTN[6:7]
+* MAC  = AUTN[8:15]
+* XMAC = f1(K, AMF, SQN, RAND)
+* RES  = f2(K, RAND)
+* CK   = f3(K, RAND)
+* IK   = f4(K, RAND)
+*/
 uint8 SQN[6];
 uint8 AMF[2];
 uint8 MAC[8];

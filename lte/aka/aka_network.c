@@ -42,6 +42,14 @@ uint8 AMF[2] = {
  0x00, 0x00
 };
 
+/*
+* MAC  = f1(K, AMF, SQN, RAND)
+* XRES = f2(K, RAND)
+* CK   = f3(K, RAND)
+* IK   = f4(K, RAND)
+* AK   = f5(K, RAND)
+* AUTN = (SQN ^ AK) || AMF || MAC
+*/
 uint8 MAC[8];
 uint8 XRES[16];
 uint8 CK[16];

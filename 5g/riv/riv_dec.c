@@ -57,11 +57,23 @@ int main(int argc, char *argv[])
     if (argc > 1)
     {
         RIV = atoi( argv[1] );
+
+        if (argc > 2)
+        {
+            N_size_BWP = atoi( argv[2] );
+            if ((N_size_BWP < 1) || (N_size_BWP > 275))
+            {
+                printf("ERR: wrong input N_size_BWP\n\n");
+                return -1;
+            }
+        }
+
         if ((RIV >= 0) && (RIV <= 37949))
         {
             decodeRiv(N_size_BWP, RIV, &RB_start, &L_RBs);
 
             printf("\n");
+            printf("BWP size  = %d\n", N_size_BWP);
             printf("RB start  = %d\n", RB_start);
             printf("RB number = %d\n", L_RBs);
             printf("\n");
@@ -73,8 +85,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Usage: riv_dec RIV\n\n");
-        return 0;
+        printf("Usage: riv_dec RIV\n");
+        printf("     : riv_dec RIV N_size_BWP\n\n");
     }
 
     return 0;

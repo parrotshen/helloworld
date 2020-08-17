@@ -4,7 +4,7 @@ CFLAGS = -Wall
 all: riv_enc riv_dec
 
 riv_enc: riv_enc.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -lm -o $@
 
 riv_dec: riv_dec.c
 	$(CC) $(CFLAGS) $< -o $@

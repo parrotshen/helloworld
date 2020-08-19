@@ -77,12 +77,12 @@ void dump(char *name, const void *addr, int len)
 }
 
 
-void nossl_SHA1_Transform(unsigned long state[5], const unsigned char buffer[64])
+void nossl_SHA1_Transform(unsigned int state[5], const unsigned char buffer[64])
 {
-    unsigned long a, b, c, d, e;
+    unsigned int a, b, c, d, e;
     typedef union {
-    unsigned char c[64];
-    unsigned long l[16];
+        unsigned char c[64];
+        unsigned int  l[16];
     } CHAR64LONG16;
     CHAR64LONG16 *block;
 
@@ -149,14 +149,14 @@ void fips186_2_prng(
 )
 {
     uint32 addresult, carry;
-    uint64 state[5] = {
+    uint32 state[5] = {
         0x67452301,
         0xefcdab89,
         0x98badcfe,
         0x10325476,
         0xc3d2e1f0
     };
-    uint64 t[5];
+    uint32 t[5];
     uint8 xval[64];
     uint8 w[20];
     int i, j, m;

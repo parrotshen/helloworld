@@ -86,6 +86,7 @@ git commit -m "comments"
 git commit -a -m "comments"
 
 # Discard changes
+git checkout file_name
 git checkout -- file_name
 
 # Show the commit history

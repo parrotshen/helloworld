@@ -12,12 +12,29 @@
 uint16 asciiToGsm7bit(uint8 *pIn, uint16 inLen, uint8 *pOut, uint16 outLenMax);
 uint16 gsm7bitToAscii(uint8 *pIn, uint16 inLen, uint8 *pOut, uint16 outLenMax);
 
+/**
+ * Short message encoding in GSM 7-bit.
+ * @param [out]  pOut        Output buffer.
+ * @param [out]  outSizeMax  Output buffer size.
+ * @param [in]   pIn         Input string.
+ * @param [in]   inSize      Input string length.
+ * @returns  Encoded data length.
+ */
 uint16 sms_encodeGsm7bit(
     uint8  *pOut,
     uint16  outSizeMax,
     uint8  *pIn,
-    uint16 *pInSize
+    uint16  inSize
 );
+
+/**
+ * Short message encoding in GSM 7-bit.
+ * @param [in]   pIn         Input data.
+ * @param [in]   inSize      Input data length.
+ * @param [out]  pOut        Output buffer.
+ * @param [out]  outSizeMax  Output buffer size.
+ * @returns  Decoded string length.
+ */
 uint16 sms_decodeGsm7bit(
     uint8  *pIn,
     uint16  inSize,

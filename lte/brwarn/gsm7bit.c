@@ -149,11 +149,19 @@ uint16 gsm7bitToAscii(uint8 *pIn, uint16 inLen, uint8 *pOut, uint16 outLenMax)
 }
 
 
+/**
+ * Short message encoding in GSM 7-bit.
+ * @param [out]  pOut        Output buffer.
+ * @param [out]  outSizeMax  Output buffer size.
+ * @param [in]   pIn         Input string.
+ * @param [in]   inSize      Input string length.
+ * @returns  Encoded data length.
+ */
 uint16 sms_encodeGsm7bit(
     uint8  *pOut,
     uint16  outSizeMax,
     uint8  *pIn,
-    uint16 *pInSize
+    uint16  inSize
 )
 {
     uint8   mask[] = {
@@ -165,7 +173,6 @@ uint16 sms_encodeGsm7bit(
                 0xFC,  // 5
                 0xFE   // 6
             };
-    uint16  inSize = (*pInSize);
     uint16  outSize = 0;
     uint8   byte;
     uint8  *pBuf;
@@ -182,15 +189,20 @@ uint16 sms_encodeGsm7bit(
     }
     inSize = asciiToGsm7bit(pIn, inSize, pBuf, (inSize * 2));
     pIn = pBuf;
-    (*pInSize) = inSize;
+    #if (DEBUG)
+    printf("> inSize = %u\n", inSize);
+    #endif
 
     outSize = CEIL_DIV((inSize * 7), 8);
     if (outSize > outSizeMax)
     {
-        printf("GSM 7-bit alphabet length(%u) is too large\n", inSize);
+        printf("GSM 7-bit alphabet length(%u < %u)\n", outSizeMax, outSize);
         free( pBuf );
         return 0;
     }
+    #if (DEBUG)
+    printf("> outSize = %u\n", outSize);
+    #endif
 
     /*
     *         0 1 2 3 4 5 6 0  1 2  3  4  5  6  0  1   2  3  4  5  6  0  1  2   3
@@ -226,6 +238,14 @@ uint16 sms_encodeGsm7bit(
     return outSize;
 }
 
+/**
+ * Short message encoding in GSM 7-bit.
+ * @param [in]   pIn         Input data.
+ * @param [in]   inSize      Input data length.
+ * @param [out]  pOut        Output buffer.
+ * @param [out]  outSizeMax  Output buffer size.
+ * @returns  Decoded string length.
+ */
 uint16 sms_decodeGsm7bit(
     uint8  *pIn,
     uint16  inSize,
@@ -263,12 +283,15 @@ uint16 sms_decodeGsm7bit(
     outSize = FLOOR_DIV((inSize * 8), 7);
     if ((outSize + 1) > outSizeMax)
     {
-        printf("GSM 7-bit alphabet length(%u) is too large\n", inSize);
+        printf("GSM 7-bit alphabet length(%u < %u)\n", outSizeMax, (outSize + 1));
         pOut[0] = 0x00;
         return 0;
     }
+    #if (DEBUG)
+    printf("> outSize = %u\n", outSize);
+    #endif
 
-    pBuf = malloc( outSize );
+    pBuf = malloc(inSize * 2);
     if (NULL == pBuf)
     {
         printf("%s: out of memory\n", __func__);
@@ -285,7 +308,7 @@ uint16 sms_decodeGsm7bit(
     *   m(l)  7 6 5 4 3 2 1 7  6 5  4  3  2  1  7  6   5  4  3  2  1  7  6  5   4
     */
     temp = 0x00;
-    for (j=0, k=0; k<inSize; k++)
+    for (j=0, k=0; k<outSize; k++)
     {
         m = (k % 7);
         if (m == 6)
@@ -322,8 +345,11 @@ uint16 sms_decodeGsm7bit(
         }
     }
 
-    outSize = gsm7bitToAscii(pBuf, inSize, pOut, outSizeMax);
+    outSize = gsm7bitToAscii(pBuf, outSize, pOut, outSizeMax);
     pOut[outSize] = 0x00;
+    #if (DEBUG)
+    printf("> outSize = %u\n", outSize);
+    #endif
 
     free( pBuf );
 

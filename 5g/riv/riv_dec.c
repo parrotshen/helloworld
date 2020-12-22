@@ -38,7 +38,7 @@ void decodeRiv(int N_size_BWP, int RIV, int *RB_start, int *L_RBs)
     }
     else
     {
-        printf("un-identify resource allocation type 2 (RIV=%d)\n\n", RIV);
+        printf("un-identify resource allocation type 1 (RIV=%d)\n\n", RIV);
         *RB_start = 0;
         *L_RBs = 0;
         exit(0);

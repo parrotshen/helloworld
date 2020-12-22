@@ -18,7 +18,7 @@ int encodeRiv(int N_size_BWP, int RB_start, int L_RBs)
     if (L_RBs < 1) return -1;
     if (L_RBs > (N_size_BWP - RB_start)) return -1;
 
-    if ((L_RBs - 1) < DIV_FLOOR(N_size_BWP, 2))
+    if ((L_RBs - 1) <= DIV_FLOOR(N_size_BWP, 2))
     {
         RIV = ((N_size_BWP * (L_RBs - 1)) + RB_start);
     }

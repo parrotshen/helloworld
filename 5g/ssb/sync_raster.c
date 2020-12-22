@@ -11,7 +11,7 @@ void help(void)
     printf("  -x   N value for (0 ~ 3000) MHz.\n");
     printf("  -y   N value for (3000 ~ 24250) MHz.\n");
     printf("  -z   N value for (24250 ~ 100000) MHz.\n");
-    printf("  -m   M value (1, 3, 5).\n");
+    printf("  -m   M value (1, 3, 5) for (0 ~ 3000) MHz.\n");
     printf("  -h   Show the help message.\n");
     printf("\n");
 }

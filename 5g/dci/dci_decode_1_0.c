@@ -13,76 +13,76 @@ void decode_1_0_c_rnti(uint8 *dci, int bits, int bwp, int raFlag)
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("DL DCI flag: %d\n", val);
+    printf("DL DCI flag: %d (1 bit)\n", val);
 
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     if ( raFlag )
     {
         val = get_bits(dci, offset, 6);
         offset += 6;
-        printf("RA preamble index: %d\n", val);
+        printf("RA preamble index: %d (6 bits)\n", val);
 
         val = get_bits(dci, offset, 1);
         offset += 1;
-        printf("UL/SUL indicator: %d\n", val);
+        printf("UL/SUL indicator: %d (1 bit)\n", val);
 
         val = get_bits(dci, offset, 6);
         offset += 6;
-        printf("SS/PBCH index: %d\n", val);
+        printf("SS/PBCH index: %d (6 bits)\n", val);
 
         val = get_bits(dci, offset, 4);
         offset += 4;
-        printf("PRACH mask index: %d\n", val);
+        printf("PRACH mask index: %d (4 bits)\n", val);
 
         val = get_bits(dci, offset, 10);
         offset += 10;
-        printf("Reserved: %d\n", val);
+        printf("Reserved: %d (10 bits)\n", val);
     }
     else
     {
         val = get_bits(dci, offset, 4);
         offset += 4;
-        printf("TD resource assignment: %d\n", val);
+        printf("TD resource assignment: %d (4 bits)\n", val);
 
         val = get_bits(dci, offset, 1);
         offset += 1;
-        printf("VRB-PRB mapping: %d\n", val);
+        printf("VRB-PRB mapping: %d (1 bit)\n", val);
 
         val = get_bits(dci, offset, 5);
         offset += 5;
-        printf("MCS: %d\n", val);
+        printf("MCS: %d (5 bits)\n", val);
 
         val = get_bits(dci, offset, 1);
         offset += 1;
-        printf("NDI: %d\n", val);
+        printf("NDI: %d (1 bit)\n", val);
 
         val = get_bits(dci, offset, 2);
         offset += 2;
-        printf("RV: %d\n", val);
+        printf("RV: %d (2 bits)\n", val);
 
         val = get_bits(dci, offset, 4);
         offset += 4;
-        printf("HARQ ID: %d\n", val);
+        printf("HARQ ID: %d (4 bits)\n", val);
 
         val = get_bits(dci, offset, 2);
         offset += 2;
-        printf("DAI: %d\n", val);
+        printf("DAI: %d (2 bits)\n", val);
 
         val = get_bits(dci, offset, 2);
         offset += 2;
-        printf("TPC command: %d\n", val);
+        printf("TPC command: %d (2 bits)\n", val);
 
         val = get_bits(dci, offset, 3);
         offset += 3;
-        printf("PUCCH resource: %d\n", val);
+        printf("PUCCH resource: %d (3 bits)\n", val);
 
         val = get_bits(dci, offset, 3);
         offset += 3;
-        printf("PDSCH to HARQ feedback: %d\n", val);
+        printf("PDSCH to HARQ feedback: %d (3 bits)\n", val);
     }
 
     printf("\n");
@@ -105,36 +105,36 @@ void decode_1_0_p_rnti(uint8 *dci, int bits, int bwp)
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("Short message indicator: %d\n", val);
+    printf("Short message indicator: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 8);
     offset += 8;
-    printf("Short message: %02Xh\n", val);
+    printf("Short message: %02Xh (8 bits)\n", val);
 
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("TD resource assignment: %d\n", val);
+    printf("TD resource assignment: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("VRB-PRB mapping: %d\n", val);
+    printf("VRB-PRB mapping: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 5);
     offset += 5;
-    printf("MCS: %d\n", val);
+    printf("MCS: %d (5 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("TB scaling: %d\n", val);
+    printf("TB scaling: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 6);
     offset += 6;
-    printf("Reserved: %d\n", val);
+    printf("Reserved: %d (6 bits)\n", val);
 
     printf("\n");
 
@@ -157,31 +157,31 @@ void decode_1_0_si_rnti(uint8 *dci, int bits, int bwp)
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("TD resource assignment: %d\n", val);
+    printf("TD resource assignment: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("VRB-PRB mapping: %d\n", val);
+    printf("VRB-PRB mapping: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 5);
     offset += 5;
-    printf("MCS: %d\n", val);
+    printf("MCS: %d (5 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("RV: %d\n", val);
+    printf("RV: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("SI indicator: %d\n", val);
+    printf("SI indicator: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 15);
     offset += 15;
-    printf("Reserved: %d\n", val);
+    printf("Reserved: %d (15 bits)\n", val);
 
     printf("\n");
 
@@ -204,27 +204,27 @@ void decode_1_0_ra_rnti(uint8 *dci, int bits, int bwp)
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("TD resource assignment: %d\n", val);
+    printf("TD resource assignment: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("VRB-PRB mapping: %d\n", val);
+    printf("VRB-PRB mapping: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 5);
     offset += 5;
-    printf("MCS: %d\n", val);
+    printf("MCS: %d (5 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("TB scaling: %d\n", val);
+    printf("TB scaling: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 16);
     offset += 16;
-    printf("Reserved: %d\n", val);
+    printf("Reserved: %d (16 bits)\n", val);
 
     printf("\n");
 
@@ -246,52 +246,52 @@ void decode_1_0_tc_rnti(uint8 *dci, int bits, int bwp)
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("DL DCI flag: %d\n", val);
+    printf("DL DCI flag: %d (1 bit)\n", val);
 
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("TD resource assignment: %d\n", val);
+    printf("TD resource assignment: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("VRB-PRB mapping: %d\n", val);
+    printf("VRB-PRB mapping: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 5);
     offset += 5;
-    printf("MCS: %d\n", val);
+    printf("MCS: %d (5 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("NDI: %d\n", val);
+    printf("NDI: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("RV: %d\n", val);
+    printf("RV: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("HARQ ID: %d\n", val);
+    printf("HARQ ID: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("DAI: %d\n", val);
+    printf("DAI: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("TPC command: %d\n", val);
+    printf("TPC command: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 3);
     offset += 3;
-    printf("PUCCH resource: %d\n", val);
+    printf("PUCCH resource: %d (3 bits)\n", val);
 
     val = get_bits(dci, offset, 3);
     offset += 3;
-    printf("PDSCH to HARQ feedback: %d\n", val);
+    printf("PDSCH to HARQ feedback: %d (3 bits)\n", val);
 
     printf("\n");
 

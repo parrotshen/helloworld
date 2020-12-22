@@ -14,40 +14,40 @@ void decode_0_0_c_rnti(uint8 *dci, int bits, int bwp)
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("UL DCI flag: %d\n", val);
+    printf("UL DCI flag: %d (1 bit)\n", val);
 
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("TD resource assignment: %d\n", val);
+    printf("TD resource assignment: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("Frequency hopping: %d\n", val);
+    printf("Frequency hopping: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 5);
     offset += 5;
-    printf("MCS: %d\n", val);
+    printf("MCS: %d (5 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("NDI: %d\n", val);
+    printf("NDI: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("RV: %d\n", val);
+    printf("RV: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("HARQ ID: %d\n", val);
+    printf("HARQ ID: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("TPC command: %d\n", val);
+    printf("TPC command: %d (2 bits)\n", val);
 
     padding = (bits - offset);
     if (padding > 0)
@@ -86,40 +86,40 @@ void decode_0_0_tc_rnti(uint8 *dci, int bits, int bwp)
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("UL DCI flag: %d\n", val);
+    printf("UL DCI flag: %d (1 bit)\n", val);
 
     size = g_fresBits[bwp];
     val = get_bits(dci, offset, size);
     offset += size;
-    printf("FD resource assignment: %d (%d bits)\n", val, size);
+    printf("FD resource assignment: %d ([1;33m%d[0m bits)\n", val, size);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("TD resource assignment: %d\n", val);
+    printf("TD resource assignment: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("Frequency hopping: %d\n", val);
+    printf("Frequency hopping: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 5);
     offset += 5;
-    printf("MCS: %d\n", val);
+    printf("MCS: %d (5 bits)\n", val);
 
     val = get_bits(dci, offset, 1);
     offset += 1;
-    printf("NDI: %d\n", val);
+    printf("NDI: %d (1 bit)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("RV: %d\n", val);
+    printf("RV: %d (2 bits)\n", val);
 
     val = get_bits(dci, offset, 4);
     offset += 4;
-    printf("HARQ ID: %d\n", val);
+    printf("HARQ ID: %d (4 bits)\n", val);
 
     val = get_bits(dci, offset, 2);
     offset += 2;
-    printf("TPC command: %d\n", val);
+    printf("TPC command: %d (2 bits)\n", val);
 
     padding = (bits - offset);
     if (padding > 0)

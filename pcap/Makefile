@@ -1,7 +1,15 @@
 CC = gcc
 
-all:
-	$(CC) -Wall pcap_gen.c -o pcap_gen
+all: pcap_gen
+
+pcap_gen: pcap_gen.o util.o
+	$(CC) -Wall $^ -o $@
+
+pcap_gen.o: pcap_gen.c util.h
+	$(CC) -Wall -c $<
+
+util.o: util.c util.h
+	$(CC) -Wall -c $<
 
 clean:
-	rm -f pcap_gen
+	rm -f pcap_gen *.o

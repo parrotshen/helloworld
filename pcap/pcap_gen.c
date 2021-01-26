@@ -2,11 +2,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "util.h"
 
 
 // /////////////////////////////////////////////////////////////////////////////
 //    Macro declarations
 // /////////////////////////////////////////////////////////////////////////////
+
+#define PCAP_HEADER_LEN      (sizeof(pcap_hdr_t))
+#define PCAP_SUB_HEADER_LEN  (sizeof(pcaprec_hdr_t))
+
+#define PCAP_MAGIC_NUM       (0xA1B2C3D4)
+#define PCAP_MAGIC_NUM_NANO  (0xA1B23C4D)  /* ns resolution */
+
+#define MAX_BUF_SIZE  4096
 
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -31,30 +40,26 @@ typedef struct pcaprec_hdr_s {
     unsigned int    orig_len;       /* actual length of packet */
 } pcaprec_hdr_t;
 
-#define PCAP_HEADER_LEN      (sizeof(pcap_hdr_t))
-#define PCAP_SUB_HEADER_LEN  (sizeof(pcaprec_hdr_t))
-
-#define PCAP_MAGIC_NUM       (0xA1B2C3D4)
-#define PCAP_MAGIC_NUM_NANO  (0xA1B23C4D)  /* ns resolution */
-
 
 // /////////////////////////////////////////////////////////////////////////////
 //    Variables declarations
 // /////////////////////////////////////////////////////////////////////////////
+
+unsigned char g_data[MAX_BUF_SIZE];
+unsigned int  g_dataLen;
 
 
 // /////////////////////////////////////////////////////////////////////////////
 //    Functions
 // /////////////////////////////////////////////////////////////////////////////
 
-int main(int argc, char *argv[])
+void foo_example(void)
 {
-    char *pName = "pcap_gen.pcap";
+    char *pOut = "foo_example.pcap";
     FILE *pFile = NULL;
 
-    unsigned char GlobalHdr[PCAP_HEADER_LEN];
-    unsigned char PacketHdr[PCAP_SUB_HEADER_LEN];
-    pcaprec_hdr_t *pPacketHdr = (pcaprec_hdr_t *)PacketHdr;
+    unsigned char globalHdr[PCAP_HEADER_LEN];
+    unsigned char packetHdr[PCAP_SUB_HEADER_LEN];
 
     unsigned char eth[14] = {
         0xfe, 0xfe, 0xfe, 0x00, 0x00, 0x00,
@@ -90,37 +95,158 @@ int main(int argc, char *argv[])
     int totalLen = (ethLen + ipLen + udpLen + fooLen);
 
 
-    if (argc > 1)
+    pFile = fopen(pOut, "w");
+    if (NULL == pFile)
     {
-        pName = argv[1];
+        printf("ERR: fail to open %s\n", pOut);
+        return;
     }
 
-    pFile = fopen(pName, "wb");
-    if ( pFile )
+    pcap_hdr_t *pGlobalHdr = (pcap_hdr_t *)globalHdr;        
+    pcaprec_hdr_t *pPacketHdr = (pcaprec_hdr_t *)packetHdr;
+
+    pGlobalHdr->magic_number  = PCAP_MAGIC_NUM;
+    pGlobalHdr->version_major = 2;
+    pGlobalHdr->version_minor = 4;
+    pGlobalHdr->thiszone      = 0;
+    pGlobalHdr->sigfigs       = 0;
+    pGlobalHdr->snaplen       = 262144;
+    pGlobalHdr->network       = 1;  /* Ethernet */
+
+    pPacketHdr->ts_sec   = 0;
+    pPacketHdr->ts_usec  = 0;
+    pPacketHdr->incl_len = (totalLen);
+    pPacketHdr->orig_len = (totalLen);
+
+    fwrite(globalHdr, 1, PCAP_HEADER_LEN,     pFile);
+    fwrite(packetHdr, 1, PCAP_SUB_HEADER_LEN, pFile);
+    fwrite(eth,       1, ethLen, pFile);
+    fwrite(ip,        1, ipLen,  pFile);
+    fwrite(udp,       1, udpLen, pFile);
+    fwrite(foo,       1, fooLen, pFile);
+    
+    fclose( pFile );        
+}
+
+int generate_pcap(
+    char          *pOut,
+    unsigned char *pData,
+    unsigned int   dataLen,
+    unsigned int   user
+)
+{
+    FILE *pFile = NULL;
+
+    unsigned char globalHdr[PCAP_HEADER_LEN];
+    unsigned char packetHdr[PCAP_SUB_HEADER_LEN];
+
+
+    pFile = fopen(pOut, "w");
+    if (NULL == pFile)
     {
-        pcap_hdr_t    *pGlobalHdr = (pcap_hdr_t *)GlobalHdr;        
+        printf("ERR: fail to open %s\n", pOut);
+        return 0;
+    }
 
-        pGlobalHdr->magic_number  = PCAP_MAGIC_NUM;
-        pGlobalHdr->version_major = 2;
-        pGlobalHdr->version_minor = 4;
-        pGlobalHdr->thiszone      = 0;
-        pGlobalHdr->sigfigs       = 0;
-        pGlobalHdr->snaplen       = 262144;
-        pGlobalHdr->network       = 1;  //Ethernet
+    pcap_hdr_t *pGlobalHdr = (pcap_hdr_t *)globalHdr;        
+    pcaprec_hdr_t *pPacketHdr = (pcaprec_hdr_t *)packetHdr;
 
-        pPacketHdr->ts_sec   = 0;
-        pPacketHdr->ts_usec  = 0;
-        pPacketHdr->incl_len = (totalLen);
-        pPacketHdr->orig_len = (totalLen);
+    pGlobalHdr->magic_number  = PCAP_MAGIC_NUM;
+    pGlobalHdr->version_major = 2;
+    pGlobalHdr->version_minor = 4;
+    pGlobalHdr->thiszone      = 0;
+    pGlobalHdr->sigfigs       = 0;
+    pGlobalHdr->snaplen       = 262144;
+    pGlobalHdr->network       = ((0 == user) ? 1 : user);
 
-        fwrite(GlobalHdr, 1, PCAP_HEADER_LEN,     pFile);
-        fwrite(PacketHdr, 1, PCAP_SUB_HEADER_LEN, pFile);
-        fwrite(eth,       1, ethLen, pFile);
-        fwrite(ip,        1, ipLen,  pFile);
-        fwrite(udp,       1, udpLen, pFile);
-        fwrite(foo,       1, fooLen, pFile);
-        
-        fclose( pFile );        
+    pPacketHdr->ts_sec   = 0;
+    pPacketHdr->ts_usec  = 0;
+    pPacketHdr->incl_len = (dataLen);
+    pPacketHdr->orig_len = (dataLen);
+
+    fwrite(globalHdr, 1, PCAP_HEADER_LEN,     pFile);
+    fwrite(packetHdr, 1, PCAP_SUB_HEADER_LEN, pFile);
+    fwrite(pData,     1, dataLen, pFile);
+
+    fclose( pFile );        
+
+    return 1;
+}
+
+void help(void)
+{
+    printf("Usage: pcap_gen [OPTION]...\n");
+    printf("\n");
+    printf("  -i INPUT    Input .txt file.\n");
+    printf("  -o OUTPUT   Output .pcap file.\n");
+    printf("  -u DLT      DLT User number (147 ~ 162).\n");
+    printf("  -t          Generate a .pcap example.\n");
+    printf("  -h          Show the help message.\n");
+    printf("\n");
+}
+
+int main(int argc, char *argv[])
+{
+    char *pOut = "pcap_gen.pcap";
+    char *pIn = NULL;
+    int user = 1; /* Ethernet */
+    int retval;
+    int ch;
+
+
+    if (1 == argc)
+    {
+        help();
+        return 0;
+    }
+
+    opterr = 0;
+    while ((ch=getopt(argc, argv, "i:o:u:th")) != -1)
+    {
+        switch ( ch )
+        {
+            case 'i':
+                pIn = optarg;
+                break;
+            case 'o':
+                pOut = optarg;
+                break;
+            case 'u':
+                user = atoi( optarg );
+                if ((user < 147) || (user > 162))
+                {
+                    printf("ERR: wront DLT User number %s\n", optarg);
+                    return -1;
+                }
+                break;
+            case 't':
+                foo_example();
+                return 0;
+                break;
+            case 'h':
+            default:
+                help();
+                return 0;
+        }
+    }
+
+    if (NULL == pIn)
+    {
+        printf("ERR: no specified input file\n");
+        return -1;
+    }
+
+    g_dataLen = read_file(pIn, g_data, MAX_BUF_SIZE);
+    if (0 == g_dataLen)
+    {
+        printf("ERR: fail to read %s\n", pIn);
+        return -1;
+    }
+
+    retval = generate_pcap(pOut, g_data, g_dataLen, user);
+    if (retval > 0)
+    {
+        printf("%s (packet %d bytes)\n", pOut, g_dataLen);
     }
 
     return 0;

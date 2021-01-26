@@ -1,6 +1,15 @@
+# openssl-1.1.1c
+OPENSSL = /usr/local
+
 CC = gcc
-CFLAGS = -Wall -I/usr/local/include
-LDFLAGS = -L/usr/local/lib -lssl -lcrypto
+
+CFLAGS += -Wall
+CFLAGS += -I$(OPENSSL)/include
+
+LDFLAGS += -L$(OPENSSL)/lib
+LDFLAGS += -lssl
+LDFLAGS += -lcrypto
+
 
 APP_NAME = ecies_test
 

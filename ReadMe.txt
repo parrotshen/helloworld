@@ -108,5 +108,8 @@ git reset --hard
 git reset --hard tag_name
 
 # Undo git add, remove before a commit
-git reset file_name
+git reset HEAD file_name
+
+# Do a new commit to cancel the last commit
+git revert HEAD --no-edit
 

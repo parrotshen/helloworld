@@ -39,7 +39,7 @@ git init
 [ Clone a repository ]
 
 # Create a working copy of a repository
-mkdir foo_repos
+mkdir bar_repos
 cd ./bar_repos
 
 # Clone with HTTP

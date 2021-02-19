@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
 
 
 #define DIV_FLOOR(X, Y)  ((X) / (Y))
@@ -184,6 +185,7 @@ void show_frequency(
     int    F_DL_low,  /* MHz */
     int    F_DL_high, /* MHz */
     int    F_Raster[2],
+    double centFreq,  /* MHz */
     int    BW,
     int    N_RB,
     int    SCS
@@ -198,6 +200,7 @@ void show_frequency(
     int N_SSB_CRB;
     int k_SSB;
     int count;
+    int found;
     int i;
 
 
@@ -212,6 +215,7 @@ void show_frequency(
         ss_raster
        );
     printf("-------------------------------+-----------+-------+------------\n");
+    found = 0;
     for (i=0; i<2; i++)
     {
         count = 0;
@@ -249,17 +253,37 @@ void show_frequency(
                     N_SSB_CRB = ((((int)(ss_low - rb_low) * 1000) / 60) / 12);
                     k_SSB  = ((((int)(ss_low - rb_low) * 1000) / 60) % 12);
                     k_SSB /= (SCS / 60);
-                    printf(
-                        "[1;36m%s[0m %.2f %.2f %.2f |    %4d   |   %2d  | %s\n",
-                        ((count == 0) ? "CRB" : "   "),
-                        rb_low,
-                        F_REF,
-                        rb_high,
-                        N_SSB_CRB,
-                        k_SSB,
-                        ((count == 0) ? raster : "")
-                    );
-                    count++;
+                    if (centFreq > 0.0)
+                    {
+                        if (fabs(centFreq - F_REF) < 0.00001)
+                        {
+                            printf(
+                                "[1;36mCRB[0m %.2f [1;33m%.2f[0m %.2f |    %4d   |   %2d  | %s\n",
+                                rb_low,
+                                F_REF,
+                                rb_high,
+                                N_SSB_CRB,
+                                k_SSB,
+                                raster
+                            );
+                            count++;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        printf(
+                            "[1;36m%s[0m %.2f %.2f %.2f |    %4d   |   %2d  | %s\n",
+                            ((count == 0) ? "CRB" : "   "),
+                            rb_low,
+                            F_REF,
+                            rb_high,
+                            N_SSB_CRB,
+                            k_SSB,
+                            ((count == 0) ? raster : "")
+                        );
+                        count++;
+                    }
                 }
             }
         }
@@ -267,6 +291,10 @@ void show_frequency(
         {
             printf("-------------------------------+-----------+-------+------------\n");
         }
+    }
+    if ((centFreq > 0.0) && (0 == found))
+    {
+        printf("\n%.2f MHz is not an available center frequency\n", centFreq);
     }
     printf("\n");
 }
@@ -277,6 +305,7 @@ void help(void)
     printf("\n");
     printf("  -b   NR operating band (257, 258, 260, 261).\n");
     printf("  -w   Bandwidth in MHz (50, 100, 200, 400).\n");
+    printf("  -f   Center frequency in MHz.\n");
     printf("  -s   Subcarrier spacing (60, 120 KHz).\n");
     printf("  -g   GSCN (22256 ~ 26639).\n");
     printf("  -r   SS Block raster (120, 240 KHz).\n");
@@ -290,6 +319,7 @@ int main(int argc, char *argv[])
     double SS_REF;
     double ss_low;
     double ss_high;
+    double centFreq = 0.0;
     int band = 257;
     int GSCN = 22388;
     int BW = 50;
@@ -306,7 +336,7 @@ int main(int argc, char *argv[])
     band_init();
 
     opterr = 0;
-    while ((ch=getopt(argc, argv, "b:w:s:g:r:h")) != -1)
+    while ((ch=getopt(argc, argv, "b:w:f:s:g:r:h")) != -1)
     {
         switch ( ch )
         {
@@ -315,6 +345,9 @@ int main(int argc, char *argv[])
                 break;
             case 'w':
                 BW = atoi( optarg );
+                break;
+            case 'f':
+                centFreq = (double)atof( optarg );
                 break;
             case 's':
                 SCS = atoi( optarg );
@@ -393,6 +426,7 @@ int main(int argc, char *argv[])
             g_band[n].F_DL_low,
             g_band[n].F_DL_high,
             g_band[n].F_Raster,
+            centFreq,
             BW,
             N_RB,
             SCS

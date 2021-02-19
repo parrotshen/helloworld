@@ -7,7 +7,7 @@ band_RF1: band_FR1.c
 	$(CC) $(CFLAGS) $< -o $@
 
 band_RF2: band_FR2.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -lm $< -o $@
 
 nr_arfcn: nr_arfcn.c
 	$(CC) $(CFLAGS) $< -o $@

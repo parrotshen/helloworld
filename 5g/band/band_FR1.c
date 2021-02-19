@@ -938,13 +938,14 @@ void show_frequency(
     int    F_DL_low,  /* MHz */
     int    F_DL_high, /* MHz */
     int    F_Raster[2],
+    int    centFreq,  /* KHz */
     int    BW,
     int    N_RB,
     int    SCS
 )
 {
     char raster[20];
-    double F_REF;
+    int F_REF;
     double f_low;
     double f_high;
     double rb_low;
@@ -952,6 +953,7 @@ void show_frequency(
     int N_SSB_CRB;
     int k_SSB;
     int count;
+    int found;
     int i;
 
 
@@ -966,6 +968,7 @@ void show_frequency(
         ss_raster
     );
     printf("-------------------------------------+-----------+-------+------------\n");
+    found = 0;
     for (i=0; i<2; i++)
     {
         if (0 == F_Raster[i]) continue;
@@ -995,7 +998,7 @@ void show_frequency(
                 printf(
                     "    %.2f %.2f %.2f\n",
                     rb_low,
-                    F_REF,
+                    (double)F_REF,
                     rb_high
                 );
                 continue;
@@ -1004,17 +1007,38 @@ void show_frequency(
                 {
                     N_SSB_CRB = (((int)(ss_low - rb_low) / 15) / 12);
                     k_SSB = (((int)(ss_low - rb_low) / 15) % 12);
-                    printf(
-                        "[1;36m%s[0m %.2f %.2f %.2f |    %4d   |   %2d  | %s\n",
-                        ((count == 0) ? "CRB" : "   "),
-                        rb_low,
-                        F_REF,
-                        rb_high,
-                        N_SSB_CRB,
-                        k_SSB,
-                        ((count == 0) ? raster : "")
-                    );
-                    count++;
+                    if (centFreq > 0)
+                    {
+                        if (centFreq == F_REF)
+                        {
+                            printf(
+                                "[1;36mCRB[0m %.2f [1;33m%.2f[0m %.2f |    %4d   |   %2d  | %s\n",
+                                rb_low,
+                                (double)F_REF,
+                                rb_high,
+                                N_SSB_CRB,
+                                k_SSB,
+                                raster
+                            );
+                            count++;
+                            found = 1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        printf(
+                            "[1;36m%s[0m %.2f %.2f %.2f |    %4d   |   %2d  | %s\n",
+                            ((count == 0) ? "CRB" : "   "),
+                            rb_low,
+                            (double)F_REF,
+                            rb_high,
+                            N_SSB_CRB,
+                            k_SSB,
+                            ((count == 0) ? raster : "")
+                        );
+                        count++;
+                    }
                 }
             }
         }
@@ -1022,6 +1046,10 @@ void show_frequency(
         {
             printf("-------------------------------------+-----------+-------+------------\n");
         }
+    }
+    if ((centFreq > 0) && (0 == found))
+    {
+        printf("\n%.2f KHz is not an available center frequency\n", (double)centFreq);
     }
     printf("\n");
 }
@@ -1035,6 +1063,7 @@ void help(void)
     printf("        50, 51, 65, 66, 70, 71, 74, 77, 78, 79)\n");
     printf("  -w   Bandwidth in MHz.\n");
     printf("       (5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100)\n");
+    printf("  -f   Center frequency in KHz.\n");
     printf("  -s   Subcarrier spacing (15, 30, 60 KHz).\n");
     printf("  -g   GSCN (2 ~ 7498, 7499 ~ 22255).\n");
     printf("  -r   SS Block raster (15, 30 KHz).\n");
@@ -1048,6 +1077,7 @@ int main(int argc, char *argv[])
     double SS_REF;
     double ss_low;
     double ss_high;
+    int centFreq = 0;
     int band = 1;
     int GSCN = 5280;
     int BW = 5;
@@ -1065,7 +1095,7 @@ int main(int argc, char *argv[])
     band_init();
 
     opterr = 0;
-    while ((ch=getopt(argc, argv, "b:w:s:g:r:h")) != -1)
+    while ((ch=getopt(argc, argv, "b:w:f:s:g:r:h")) != -1)
     {
         switch ( ch )
         {
@@ -1074,6 +1104,9 @@ int main(int argc, char *argv[])
                 break;
             case 'w':
                 BW = atoi( optarg );
+                break;
+            case 'f':
+                centFreq = atoi( optarg );
                 break;
             case 's':
                 SCS = atoi( optarg );
@@ -1188,6 +1221,7 @@ int main(int argc, char *argv[])
             g_band[n].F_DL_low,
             g_band[n].F_DL_high,
             g_band[n].F_Raster,
+            centFreq,
             BW,
             N_RB,
             SCS
@@ -1207,6 +1241,7 @@ int main(int argc, char *argv[])
             g_band[n].F_DL_low,
             g_band[n].F_DL_high,
             g_band[n].F_Raster,
+            centFreq,
             BW,
             N_RB,
             SCS

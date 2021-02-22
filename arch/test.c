@@ -53,6 +53,8 @@ int test_bitsize(void)
     printf("sizeof( int       ) is %d\n", (int)sizeof(int));
     printf("sizeof( long      ) is %d\n", (int)sizeof(long));
     printf("sizeof( long long ) is %d\n", (int)sizeof(long long));
+    printf("sizeof( float     ) is %d\n", (int)sizeof(float));
+    printf("sizeof( double    ) is %d\n", (int)sizeof(double));
     printf("sizeof( size_t    ) is %d\n", (int)sizeof(size_t));
     printf("\n");
 

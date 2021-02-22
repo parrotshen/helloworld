@@ -267,6 +267,7 @@ void show_frequency(
                                 raster
                             );
                             count++;
+                            found = 1;
                             break;
                         }
                     }

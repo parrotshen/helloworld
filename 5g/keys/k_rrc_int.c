@@ -21,7 +21,7 @@ int main(void)
 {
     uint8  KEY[32];
     uint8  S[8];
-    uint8  K_NAS_INT[16];
+    uint8  K_RRC_INT[16];
     uint8  buf[32];
 
 
@@ -44,8 +44,8 @@ int main(void)
     //mem_dump("S", S, 7);
 
     kdf(KEY, 32, S, 7, buf);
-    memcpy(K_NAS_INT, buf+16, 16);
-    mem_dump("K_NAS_INT", K_NAS_INT, 16);
+    memcpy(K_RRC_INT, buf+16, 16);
+    mem_dump("K_RRC_INT", K_RRC_INT, 16);
 
 
     return 0;

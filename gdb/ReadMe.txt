@@ -104,3 +104,9 @@ $ gdb --args EXEC_FILE [ARGUMENT...]
 (gdb) x/32xb ADDRESS
 
 
+[ Stack ]
+
+(gdb) backtrace
+(gdb) frame
+
+

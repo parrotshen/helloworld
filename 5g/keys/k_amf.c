@@ -4,30 +4,17 @@
 #include "kdf.h"
 
 
-uint8  K_SEAF[32] = {
- 0xD2, 0xBB, 0xC6, 0x3B, 0x0C, 0x14, 0x12, 0x47,
- 0x34, 0x1C, 0x0F, 0xCA, 0x3D, 0xC3, 0xBF, 0xFD,
- 0xC6, 0xBF, 0xC1, 0x81, 0x34, 0x89, 0x34, 0x2D,
- 0xE8, 0x48, 0x7E, 0x7E, 0x4D, 0xC3, 0x72, 0x8B
-};
-uint8  supi[15] = {
- /* IMSI: 001.01.0123456789 */
- '0', '0', '1',
- '0', '1',
- '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-};
-uint8  abba[2] = {
- 0x00, 0x00
-};
-
-int main(void)
+void K_AMF(
+    uint8  k_amf[32],  // OUT
+    uint8  k_seaf[32], // IN
+    uint8  supi[15],   // IN
+    uint8  abba[2]     // IN
+)
 {
     uint8  KEY[32];
     uint8  S[22];
-    uint8  K_AMF[32];
 
-
-    memcpy(KEY, K_SEAF, 32);
+    memcpy(KEY, k_seaf, 32);
 
     /* FC */
     S[0]  = 0x6D;
@@ -43,13 +30,10 @@ int main(void)
     S[20] = 0x00;
     S[21] = 0x02;
 
-    mem_dump("Key", KEY, 32);
-    mem_dump("S", S, 22);
+    //mem_dump("Key", KEY, 32);
+    //mem_dump("S", S, 22);
 
-    kdf(KEY, 32, S, 22, K_AMF);
-    mem_dump("K_AMF", K_AMF, 32);
-
-
-    return 0;
+    kdf(KEY, 32, S, 22, k_amf);
+    mem_dump("K_AMF", k_amf, 32);
 }
 

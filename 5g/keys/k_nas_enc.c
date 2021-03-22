@@ -4,28 +4,17 @@
 #include "kdf.h"
 
 
-#define ID_NEA0     0
-#define ID_128_NEA1 1
-#define ID_128_NEA2 2
-#define ID_128_NEA3 3
-
-
-uint8  K_AMF[32] = {
- 0x7E, 0x9F, 0x97, 0x70, 0x7C, 0xEF, 0x48, 0x31,
- 0x8D, 0xF1, 0x82, 0xA7, 0xF9, 0xE7, 0xBA, 0x83,
- 0x8A, 0x6F, 0xB3, 0x6A, 0xB8, 0x3A, 0x7D, 0x1B,
- 0xAF, 0x26, 0x10, 0xB9, 0x7A, 0x5B, 0x9D, 0xCF
-};
-
-int main(void)
+void K_NAS_ENC(
+    uint8  k_nas_enc[16], // OUT
+    uint8  k_amf[32],     // IN
+    int    neax           // IN
+)
 {
     uint8  KEY[32];
     uint8  S[8];
-    uint8  K_NAS_ENC[16];
     uint8  buf[32];
 
-
-    memcpy(KEY, K_AMF, 32);
+    memcpy(KEY, k_amf, 32);
 
     /* FC */
     S[0] = 0x69;
@@ -35,7 +24,7 @@ int main(void)
     S[2] = 0x00;
     S[3] = 0x01;
     /* P1 */
-    S[4] = ID_128_NEA2; /* 5G-EAx */
+    S[4] = neax; /* 5G-EAx */
     /* L1 */
     S[5] = 0x00;
     S[6] = 0x01;
@@ -44,10 +33,7 @@ int main(void)
     //mem_dump("S", S, 7);
 
     kdf(KEY, 32, S, 7, buf);
-    memcpy(K_NAS_ENC, buf+16, 16);
-    mem_dump("K_NAS_ENC", K_NAS_ENC, 16);
-
-
-    return 0;
+    memcpy(k_nas_enc, buf+16, 16);
+    mem_dump("K_NAS_ENC", k_nas_enc, 16);
 }
 

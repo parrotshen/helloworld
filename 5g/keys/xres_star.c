@@ -4,39 +4,39 @@
 #include "kdf.h"
 
 
-void XRES_STAR(
-    uint8  xres_star[16], // OUT
-    uint8  xres[16],      // IN
-    int    xres_len,      // IN
-    uint8  _rand[16],     // IN
-    uint8  ck[16],        // IN
-    uint8  ik[16],        // IN
-    uint8  snn[32]        // IN
+void xres_star(
+    uint8  XRES_STAR[16], // OUT
+    uint8  XRES[16],      // IN
+    int    XRES_LEN,      // IN
+    uint8  _RAND[16],     // IN
+    uint8  CK[16],        // IN
+    uint8  IK[16],        // IN
+    uint8  SNN[32]        // IN
 )
 {
     uint8  KEY[32];
     uint8  S[71];
     uint8  buf[32];
 
-    memcpy(KEY,    ck, 16);
-    memcpy(KEY+16, ik, 16);
+    memcpy(KEY,    CK, 16);
+    memcpy(KEY+16, IK, 16);
 
-    if (8 == xres_len) /* 8-byte XRES */
+    if (8 == XRES_LEN) /* 8-byte XRES */
     {
         /* FC */
         S[0]  = 0x6B;
         /* P0 */
-        memcpy(S+1, snn, 32);
+        memcpy(S+1, SNN, 32);
         /* L0 */
         S[33] = 0x00;
         S[34] = 0x20;
         /* P1 */
-        memcpy(S+35, _rand, 16);
+        memcpy(S+35, _RAND, 16);
         /* L1 */
         S[51] = 0x00;
         S[52] = 0x10;
         /* P2 */
-        memcpy(S+53, xres, 8);
+        memcpy(S+53, XRES, 8);
         /* L2 */
         S[61] = 0x00;
         S[62] = 0x08;
@@ -45,25 +45,25 @@ void XRES_STAR(
         //mem_dump("S", S, 63);
 
         kdf(KEY, 32, S, 63, buf);
-        memcpy(xres_star, buf+16, 16);
-        mem_dump("XRES*", xres_star, 16);
+        memcpy(XRES_STAR, buf+16, 16);
+        mem_dump("XRES*", XRES_STAR, 16);
     }
     else /* 16-byte XRES */
     {
         /* FC */
         S[0]  = 0x6B;
         /* P0 */
-        memcpy(S+1, snn, 32);
+        memcpy(S+1, SNN, 32);
         /* L0 */
         S[33] = 0x00;
         S[34] = 0x20;
         /* P1 */
-        memcpy(S+35, _rand, 16);
+        memcpy(S+35, _RAND, 16);
         /* L1 */
         S[51] = 0x00;
         S[52] = 0x10;
         /* P2 */
-        memcpy(S+53, xres, 16);
+        memcpy(S+53, XRES, 16);
         /* L2 */
         S[69] = 0x00;
         S[70] = 0x10;
@@ -72,8 +72,8 @@ void XRES_STAR(
         //mem_dump("S", S, 71);
 
         kdf(KEY, 32, S, 71, buf);
-        memcpy(xres_star, buf+16, 16);
-        mem_dump("XRES*", xres_star, 16);
+        memcpy(XRES_STAR, buf+16, 16);
+        mem_dump("XRES*", XRES_STAR, 16);
     }
 }
 

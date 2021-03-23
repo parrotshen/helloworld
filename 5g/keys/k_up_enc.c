@@ -4,17 +4,17 @@
 #include "kdf.h"
 
 
-void K_UP_ENC(
-    uint8  k_up_enc[16], // OUT
-    uint8  k_gnb[32],    // IN
-    uint8  neax          // IN
+void k_up_enc(
+    uint8  K_UP_ENC[16], // OUT
+    uint8  K_gNB[32],    // IN
+    uint8  NEAx          // IN
 )
 {
     uint8  KEY[32];
     uint8  S[8];
     uint8  buf[32];
 
-    memcpy(KEY, k_gnb, 32);
+    memcpy(KEY, K_gNB, 32);
 
     /* FC */
     S[0] = 0x69;
@@ -24,7 +24,7 @@ void K_UP_ENC(
     S[2] = 0x00;
     S[3] = 0x01;
     /* P1 */
-    S[4] = neax; /* 5G-EAx */
+    S[4] = NEAx; /* 5G-EAx */
     /* L1 */
     S[5] = 0x00;
     S[6] = 0x01;
@@ -33,7 +33,7 @@ void K_UP_ENC(
     //mem_dump("S", S, 7);
 
     kdf(KEY, 32, S, 7, buf);
-    memcpy(k_up_enc, buf+16, 16);
-    mem_dump("K_UP_ENC", k_up_enc, 16);
+    memcpy(K_UP_ENC, buf+16, 16);
+    mem_dump("K_UP_ENC", K_UP_ENC, 16);
 }
 

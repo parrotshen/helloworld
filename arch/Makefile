@@ -5,21 +5,30 @@ SIZE = $(CROSS)size
 OBJDUMP = $(CROSS)objdump
 
 
-all: hello test memory stack
+all: helloC helloS test memory stack
 
-hello: hello.o
+
+helloC: helloC.o
 	@echo "[BUILD] $@"
 	$(CC) $< -m32 -o $@
-	@echo "Generating hello.sym and hello.asm ..."
-	$(OBJDUMP) -t hello | grep "\.text" | sort > hello.sym
-	$(OBJDUMP) -S hello > hello.asm
-	$(OBJDUMP) -f hello > hello.arch
+	@echo "Generating helloC.sym and helloC.asm ..."
+	$(OBJDUMP) -t $@ | grep "\.text" | sort > helloC.sym
+	$(OBJDUMP) -S $@ > helloC.asm
+	$(OBJDUMP) -f $@ > helloC.arch
 	ldd $@
 	@echo
 
-hello.o: hello.c
+helloC.o: hello.c
 	$(CC) -Wall -m32 -g -c $< -o $@
 	$(NM) $@
+
+
+helloS: helloS.o
+	ld -s -o $@ $<
+
+helloS.o: hello.S
+	as -o $@ $<
+
 
 test: test.c
 	@echo "[BUILD] $@"
@@ -28,11 +37,13 @@ test: test.c
 	@file $@
 	@echo
 
+
 memory: memory.c
 	@echo "[BUILD] $@"
 	$(CC) -Wall $< -o $@
 	$(SIZE) $@
 	@echo
+
 
 stack: stack.c
 	@echo "[BUILD] $@"
@@ -43,9 +54,10 @@ stack: stack.c
 
 
 clean:
-	rm -f hello hello.o hello.sym hello.asm hello.arch
+	rm -f helloC helloC.o helloC.sym helloC.asm helloC.arch
+	rm -f helloS helloS.o
 	rm -f test
 	rm -f memory
 	rm -f stack
 
-.PHONY: hello test memory stack
+.PHONY: helloC helloS test memory stack

@@ -4,10 +4,10 @@
 #include "kdf.h"
 
 
-void K_NAS_INT(
-    uint8  k_nas_int[16], // OUT
-    uint8  k_amf[32],     // IN
-    int    niax           // IN
+void k_nas_int(
+    uint8  K_NAS_INT[16], // OUT
+    uint8  K_AMF[32],     // IN
+    int    NIAx           // IN
 )
 {
     uint8  KEY[32];
@@ -15,7 +15,7 @@ void K_NAS_INT(
     uint8  buf[32];
 
 
-    memcpy(KEY, k_amf, 32);
+    memcpy(KEY, K_AMF, 32);
 
     /* FC */
     S[0] = 0x69;
@@ -25,7 +25,7 @@ void K_NAS_INT(
     S[2] = 0x00;
     S[3] = 0x01;
     /* P1 */
-    S[4] = niax; /* 5G-IAx */
+    S[4] = NIAx; /* 5G-IAx */
     /* L1 */
     S[5] = 0x00;
     S[6] = 0x01;
@@ -34,7 +34,7 @@ void K_NAS_INT(
     //mem_dump("S", S, 7);
 
     kdf(KEY, 32, S, 7, buf);
-    memcpy(k_nas_int, buf+16, 16);
-    mem_dump("K_NAS_INT", k_nas_int, 16);
+    memcpy(K_NAS_INT, buf+16, 16);
+    mem_dump("K_NAS_INT", K_NAS_INT, 16);
 }
 

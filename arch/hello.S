@@ -1,0 +1,25 @@
+.data
+
+msg:
+    .ascii  "Hello, world!\n"
+    len = . - msg
+
+.text
+
+.global _start
+
+_start:
+# sys_write:
+#   %eax  %ebx  %ecx  %edx
+#    4     fd    buf   size
+    movl    $len, %edx
+    movl    $msg, %ecx
+    movl    $1,   %ebx
+    movl    $4,   %eax
+    int     $0x80
+# sys_exit:
+#   %eax  %ebx
+#    1     code
+    movl    $0,   %ebx
+    movl    $1,   %eax
+    int     $0x80

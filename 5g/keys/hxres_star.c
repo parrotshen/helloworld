@@ -5,24 +5,24 @@
 #include "kdf.h"
 
 
-void HXRES_STAR(
-    uint8  hxres_star[16], // OUT
-    uint8  xres_star[16],  // IN
-    uint8  _rand[16]       // IN
+void hxres_star(
+    uint8  HXRES_STAR[16], // OUT
+    uint8  XRES_STAR[16],  // IN
+    uint8  _RAND[16]       // IN
 )
 {
     uint8  S[32];
     uint8  buf[32];
 
     /* P0 */
-    memcpy(S, _rand, 16);
+    memcpy(S, _RAND, 16);
     /* P1 */
-    memcpy(S+16, xres_star, 16);
+    memcpy(S+16, XRES_STAR, 16);
 
     //mem_dump("S", S, 32);
 
     SHA256(S, 32, buf);
-    memcpy(hxres_star, buf+16, 16);
-    mem_dump("HXRES*", hxres_star, 16);
+    memcpy(HXRES_STAR, buf+16, 16);
+    mem_dump("HXRES*", HXRES_STAR, 16);
 }
 

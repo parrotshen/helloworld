@@ -21,35 +21,35 @@ typedef enum
 } tNEAx;
 
 
-uint8  _rand[16] = {
+uint8  _RAND[16] = {
  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-uint8  xres[16] = {
+uint8  XRES[16] = {
  0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
  0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
 };
 
-uint8  ck[16] = {
+uint8  CK[16] = {
  0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
  0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00
 };
 
-uint8  ik[16] = {
+uint8  IK[16] = {
  0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
  0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00, 0x01
 };
 
-uint8  ak[6] = {
+uint8  AK[6] = {
  0x03, 0x04, 0x05, 0x06, 0x07, 0x08
 };
 
-uint8  sqn[6] = {
+uint8  SQN[6] = {
  0x00, 0x00, 0x00, 0x00, 0x00, 0xFF
 };
 
-uint8  snn[32] = {
+uint8  SNN[32] = {
  /* PLMN-ID: 001.01 */
  '5', 'G',
  ':',
@@ -62,151 +62,152 @@ uint8  snn[32] = {
  'o', 'r', 'g'
 };
 
-uint8  supi[15] = {
+uint8  SUPI[15] = {
  /* IMSI: 001.01.0123456789 */
  '0', '0', '1',
  '0', '1',
  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
 };
 
-uint8  abba[2] = {
+uint8  ABBA[2] = {
  0x00, 0x00
 };
 
-uint32 nas_count = 0;
+uint32 NAS_COUNT = 0;
 
-int niax = ID_128_NIA2;
-int neax = ID_128_NEA2;
+int NIAx = ID_128_NIA2;
+int NEAx = ID_128_NEA2;
 
 
-extern void XRES_STAR(
-    uint8  xres_star[16], // OUT
-    uint8  xres[16],      // IN
-    int    xres_len,      // IN
-    uint8  _rand[16],     // IN
-    uint8  ck[16],        // IN
-    uint8  ik[16],        // IN
-    uint8  snn[32]        // IN
+extern void xres_star(
+    uint8  XRES_STAR[16], // OUT
+    uint8  XRES[16],      // IN
+    int    XRES_LEN,      // IN
+    uint8  _RAND[16],     // IN
+    uint8  CK[16],        // IN
+    uint8  IK[16],        // IN
+    uint8  SNN[32]        // IN
 );
 
-extern void HXRES_STAR(
-    uint8  hxres_star[16], // OUT
-    uint8  xres_star[16],  // IN
-    uint8  _rand[16]       // IN
+extern void hxres_star(
+    uint8  HXRES_STAR[16], // OUT
+    uint8  XRES_STAR[16],  // IN
+    uint8  _RAND[16]       // IN
 );
 
-extern void K_AUSF(
-    uint8  k_ausf[32], // OUT
-    uint8  ck[16],     // IN
-    uint8  ik[16],     // IN
-    uint8  ak[6],      // IN
-    uint8  sqn[6],     // IN
-    uint8  snn[32]     // IN
+extern void k_ausf(
+    uint8  K_AUSF[32], // OUT
+    uint8  CK[16],     // IN
+    uint8  IK[16],     // IN
+    uint8  AK[6],      // IN
+    uint8  SQN[6],     // IN
+    uint8  SNN[32]     // IN
 );
 
-extern void K_SEAF(
-    uint8  k_seaf[32], // OUT
-    uint8  k_ausf[32], // IN
-    uint8  snn[32]     // IN
+extern void k_seaf(
+    uint8  K_SEAF[32], // OUT
+    uint8  K_AUSF[32], // IN
+    uint8  SNN[32]     // IN
 );
 
-extern void K_AMF(
-    uint8  k_amf[32],  // OUT
-    uint8  k_seaf[32], // IN
-    uint8  supi[15],   // IN
-    uint8  abba[2]     // IN
+extern void k_amf(
+    uint8  K_AMF[32],  // OUT
+    uint8  K_SEAF[32], // IN
+    uint8  SUPI[15],   // IN
+    uint8  ABBA[2]     // IN
 );
 
-extern void K_NAS_INT(
-    uint8  k_nas_int[16], // OUT
-    uint8  k_amf[32],     // IN
-    int    niax           // IN
+extern void k_nas_int(
+    uint8  K_NAS_INT[16], // OUT
+    uint8  K_AMF[32],     // IN
+    int    NIAx           // IN
 );
 
-extern void K_NAS_ENC(
-    uint8  k_nas_enc[16], // OUT
-    uint8  k_amf[32],     // IN
-    int    neax           // IN
+extern void k_nas_enc(
+    uint8  K_NAS_ENC[16], // OUT
+    uint8  K_AMF[32],     // IN
+    int    NEAx           // IN
 );
 
-extern void K_gNB(
-    uint8  k_gnb[32], // OUT
-    uint8  k_amf[32], // IN
-    uint32 nas_count  // IN
+extern void k_gnb(
+    uint8  K_gNB[32], // OUT
+    uint8  K_AMF[32], // IN
+    uint32 NAS_COUNT  // IN
 );
 
-extern void K_NH(
-    uint8  k_nh[32],  // OUT
-    uint8  k_amf[32], // IN
-    uint8  k_gnb[32]  // IN
+extern void k_nh(
+    uint8  K_NH[32],  // OUT
+    uint8  K_AMF[32], // IN
+    uint8  K_gNB[32]  // IN
 );
 
-extern void K_RRC_INT(
-    uint8  k_rrc_int[32], // OUT
-    uint8  k_gnb[32],     // IN
-    uint8  niax           // IN
+extern void k_rrc_int(
+    uint8  K_RRC_INT[32], // OUT
+    uint8  K_gNB[32],     // IN
+    uint8  NIAx           // IN
 );
 
-extern void K_RRC_ENC(
-    uint8  k_rrc_enc[32], // OUT
-    uint8  k_gnb[32],     // IN
-    uint8  neax           // IN
+extern void k_rrc_enc(
+    uint8  K_RRC_ENC[32], // OUT
+    uint8  K_gNB[32],     // IN
+    uint8  NEAx           // IN
 );
 
-extern void K_UP_INT(
-    uint8  k_up_int[16], // OUT
-    uint8  k_gnb[32],    // IN
-    uint8  niax          // IN
+extern void k_up_int(
+    uint8  K_UP_INT[16], // OUT
+    uint8  K_gNB[32],    // IN
+    uint8  NIAx          // IN
 );
 
-extern void K_UP_ENC(
-    uint8  k_up_enc[16], // OUT
-    uint8  k_gnb[32],    // IN
-    uint8  neax          // IN
+extern void k_up_enc(
+    uint8  K_UP_ENC[16], // OUT
+    uint8  K_gNB[32],    // IN
+    uint8  NEAx          // IN
 );
 
 int main(void)
 {
-    uint8  xres_star[16];
-    uint8  hxres_star[16];
-    uint8  k_ausf[32];
-    uint8  k_seaf[32];
-    uint8  k_amf[32];
-    uint8  k_nas_int[16];
-    uint8  k_nas_enc[16];
-    uint8  k_gnb[32];
-    uint8  k_nh[32];
-    uint8  k_rrc_int[16];
-    uint8  k_rrc_enc[16];
-    uint8  k_up_int[16];
-    uint8  k_up_enc[16];
+    uint8  XRES_STAR[16];
+    uint8  HXRES_STAR[16];
+    uint8  K_AUSF[32];
+    uint8  K_SEAF[32];
+    uint8  K_AMF[32];
+    uint8  K_NAS_ENC[16];
+    uint8  K_NAS_INT[16];
+    uint8  K_gNB[32];
+    uint8  K_NH[32];
+    uint8  K_RRC_ENC[16];
+    uint8  K_RRC_INT[16];
+    uint8  K_UP_ENC[16];
+    uint8  K_UP_INT[16];
 
 
-    XRES_STAR(xres_star, xres, 16, _rand, ck, ik, snn);
+    xres_star(XRES_STAR, XRES, 16, _RAND, CK, IK, SNN);
 
-    HXRES_STAR(hxres_star, xres_star, _rand);
+    hxres_star(HXRES_STAR, XRES_STAR, _RAND);
 
-    K_AUSF(k_ausf, ck, ik, ak, sqn, snn);
+    k_ausf(K_AUSF, CK, IK, AK, SQN, SNN);
 
-    K_SEAF(k_seaf, k_ausf, snn);
+    k_seaf(K_SEAF, K_AUSF, SNN);
 
-    K_AMF(k_amf, k_seaf, supi, abba);
+    k_amf(K_AMF, K_SEAF, SUPI, ABBA);
 
-    K_NAS_INT(k_nas_int, k_amf, niax);
+    k_nas_enc(K_NAS_ENC, K_AMF, NEAx);
 
-    K_NAS_ENC(k_nas_enc, k_amf, neax);
+    k_nas_int(K_NAS_INT, K_AMF, NIAx);
 
-    K_gNB(k_gnb, k_amf, nas_count);
+    k_gnb(K_gNB, K_AMF, NAS_COUNT);
 
-    K_NH(k_nh, k_amf, k_gnb);
+    k_nh(K_NH, K_AMF, K_gNB);
 
-    K_RRC_INT(k_rrc_int, k_gnb, niax);
+    k_rrc_enc(K_RRC_ENC, K_gNB, NEAx);
 
-    K_RRC_ENC(k_rrc_enc, k_gnb, neax);
+    k_rrc_int(K_RRC_INT, K_gNB, NIAx);
 
-    K_UP_INT(k_up_int, k_gnb, niax);
+    k_up_enc(K_UP_ENC, K_gNB, NEAx);
 
-    K_UP_ENC(k_up_enc, k_gnb, neax);
+    k_up_int(K_UP_INT, K_gNB, NIAx);
+
 
     return 0;
 }

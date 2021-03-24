@@ -1,5 +1,7 @@
 CROSS = 
 CC = $(CROSS)gcc
+AS = $(CROSS)as
+LD = $(CROSS)ld
 NM = $(CROSS)nm
 SIZE = $(CROSS)size
 OBJDUMP = $(CROSS)objdump
@@ -24,10 +26,10 @@ helloC.o: hello.c
 
 
 helloS: helloS.o
-	ld -s -o $@ $<
+	$(LD) -s -o $@ $<
 
 helloS.o: hello.S
-	as -o $@ $<
+	$(AS) -o $@ $<
 
 
 test: test.c

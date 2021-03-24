@@ -45,8 +45,6 @@ void xres_star(
         //mem_dump("S", S, 63);
 
         kdf(KEY, 32, S, 63, buf);
-        memcpy(XRES_STAR, buf+16, 16);
-        mem_dump("XRES*", XRES_STAR, 16);
     }
     else /* 16-byte XRES */
     {
@@ -72,8 +70,9 @@ void xres_star(
         //mem_dump("S", S, 71);
 
         kdf(KEY, 32, S, 71, buf);
-        memcpy(XRES_STAR, buf+16, 16);
-        mem_dump("XRES*", XRES_STAR, 16);
     }
+
+    memcpy(XRES_STAR, buf+16, 16);
+    mem_dump("XRES*", XRES_STAR, 16);
 }
 

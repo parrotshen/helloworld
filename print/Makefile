@@ -1,6 +1,6 @@
 CC = gcc
 
-all: stdout stdout_flush stderr syslog terminal
+all: stdout stdout_flush stderr syslog terminal format
 
 stdout: stdout.c
 	$(CC) -Wall -DPRINT_IMMEDIATELY=0 $< -o $@
@@ -17,5 +17,8 @@ syslog: syslog.c
 terminal: terminal.c
 	$(CC) -Wall $< -o $@
 
+format: format.c
+	$(CC) -Wall $< -o $@
+
 clean:
-	rm -f stdout stdout_flush stderr syslog terminal
+	rm -f stdout stdout_flush stderr syslog terminal format

@@ -1,0 +1,60 @@
+$ strace ./helloC
+execve("./helloC", ["./helloC"], [/* 60 vars */]) = 0
+brk(0)                                  = 0x866a000
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb7864000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/tls/i686/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/tls/i686/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/tls/i686/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/tls/i686", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/tls/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/tls/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/tls", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/i686/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/i686/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/i686/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/i686", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/alliance/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/alliance/lib", {st_mode=S_IFDIR|0755, st_size=12288, ...}) = 0
+open("/usr/local/lib/tls/i686/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/i686/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/i686/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/i686", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/i686/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/i686/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/i686/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/i686", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/sse2/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/sse2", 0xbfe8bbb8) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=129241, ...}) = 0
+mmap2(NULL, 129241, PROT_READ, MAP_PRIVATE, 3, 0) = 0xb7844000
+close(3)                                = 0
+open("/lib/libc.so.6", O_RDONLY)        = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\20\275z\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=1831904, ...}) = 0
+mmap2(0x795000, 1542504, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x795000
+mprotect(0x907000, 4096, PROT_NONE)     = 0
+mmap2(0x908000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x172) = 0x908000
+mmap2(0x90b000, 10600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x90b000
+close(3)                                = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb7843000
+set_thread_area({entry_number:-1 -> 6, base_addr:0xb78436c0, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1}) = 0
+mprotect(0x908000, 8192, PROT_READ)     = 0
+mprotect(0x791000, 4096, PROT_READ)     = 0
+munmap(0xb7844000, 129241)              = 0
+fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb7863000
+write(1, "Hello, world!\n", 14Hello, world!
+)         = 14
+exit_group(0)                           = ?
+$ 

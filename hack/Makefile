@@ -11,7 +11,7 @@ LDFLAGS = -z execstack
 
 all: buffer_overflow_1 buffer_overflow_2 buffer_overflow_3 \
      shell_code udp_send \
-     goodbye exec_sh setuid
+     goodbye exec_sh setuid rootshell
 
 buffer_overflow_1: buffer_overflow_1.o
 	@echo "build ... $@"
@@ -59,6 +59,12 @@ setuid: setuid.o
 	@$(OBJDUMP) -S $@ > $@.asm
 	@./gen_shellcode_3.sh $@ > $@.code
 
+rootshell: rootshell.o
+	@echo "build ... $@"
+	@$(LD) -s -o $@ $<
+	@$(OBJDUMP) -S $@ > $@.asm
+	@./gen_shellcode_3.sh $@ > $@.code
+
 %.o: %.S
 	@$(AS) -o $@ $<
 
@@ -68,7 +74,7 @@ clean:
 	@$(RM) buffer_overflow_1 buffer_overflow_2
 	@sudo $(RM) buffer_overflow_3
 	@$(RM) shell_code udp_send
-	@$(RM) goodbye exec_sh setuid
+	@$(RM) goodbye exec_sh setuid rootshell
 	@$(RM) *.o
 
 distclean: clean

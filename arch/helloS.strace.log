@@ -1,0 +1,6 @@
+$ strace ./helloS
+execve("./helloS", ["./helloS"], [/* 60 vars */]) = 0
+write(1, "Hello, world!\n", 14Hello, world!
+)         = 14
+_exit(0)                                = ?
+$ 

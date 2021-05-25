@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    printf("UDP ready to receive on prot %u ...\n\n", port);
+    printf("UDP ready to receive on port %u ...\n\n", port);
 
     while ( 1 )
     {

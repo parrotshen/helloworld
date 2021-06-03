@@ -250,9 +250,10 @@ void show_frequency(
                 #endif
                 if (0 == (((int)(ss_low - rb_low) * 1000) % SCS))
                 {
-                    N_SSB_CRB = ((((int)(ss_low - rb_low) * 1000) / 60) / 12);
-                    k_SSB  = ((((int)(ss_low - rb_low) * 1000) / 60) % 12);
+                    int subcarriers = (((int)(ss_low - rb_low) * 1000) / 60);
+                    k_SSB  = (subcarriers % 12);
                     k_SSB /= (SCS / 60);
+                    N_SSB_CRB = ((subcarriers - k_SSB) / 12);
                     if (centFreq > 0.0)
                     {
                         if (fabs(centFreq - F_REF) < 0.00001)

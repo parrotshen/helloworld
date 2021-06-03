@@ -1005,8 +1005,9 @@ void show_frequency(
                 #endif
                 if (0 == ((int)(ss_low - rb_low) % 15))
                 {
-                    N_SSB_CRB = (((int)(ss_low - rb_low) / 15) / 12);
-                    k_SSB = (((int)(ss_low - rb_low) / 15) % 12);
+                    int subcarriers = ((int)(ss_low - rb_low) / 15);
+                    k_SSB = (subcarriers % 24);
+                    N_SSB_CRB = (((subcarriers - k_SSB) / 24) * 2);
                     if (centFreq > 0)
                     {
                         if (centFreq == F_REF)
@@ -1068,6 +1069,8 @@ void help(void)
     printf("  -g   GSCN (2 ~ 7498, 7499 ~ 22255).\n");
     printf("  -r   SS Block raster (15, 30 KHz).\n");
     printf("  -h   Show the help message.\n");
+    printf("\n");
+    printf("EX: band_FR1 -b 78 -w 100 -f 3456000 -s 30 -g 7785 -r 30\n");
     printf("\n");
 }
 

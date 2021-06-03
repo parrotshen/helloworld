@@ -1005,9 +1005,10 @@ void show_frequency(
                 #endif
                 if (0 == ((int)(ss_low - rb_low) % 15))
                 {
-                    int subcarriers = ((int)(ss_low - rb_low) / 15);
-                    k_SSB = (subcarriers % 24);
-                    N_SSB_CRB = (((subcarriers - k_SSB) / 24) * 2);
+                    int offset = ((int)(ss_low - rb_low) / 15);
+                    int sub = ((SCS / 15) * 12);
+                    N_SSB_CRB = ((offset / sub) * (SCS / 15));
+                    k_SSB = (offset % sub);
                     if (centFreq > 0)
                     {
                         if (centFreq == F_REF)

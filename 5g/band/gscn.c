@@ -11,17 +11,23 @@ unsigned int toGscn(unsigned int SS_REF, int *Mout, int *Nout)
 
     if (SS_REF < 3000000)
     {
+        if (((SS_REF % 1200) % 50) != 0)
+        {
+            printf("ERR: illegal frequency\n\n");
+            return 0;
+        }
+
         M = ((SS_REF % 1200) / 50);
         N = (SS_REF / 1200);
 
         if ((M != 1) && (M != 3) && (M != 5))
         {
-            printf("ERR: M %d should be (1, 3, 5)\n", N);
+            printf("ERR: M %d should be (1, 3, 5)\n\n", N);
             return 0;
         }
         if ((N < 1) || (N > 2499))
         {
-            printf("ERR: N %d should be (1 ~ 2499)\n", N);
+            printf("ERR: N %d should be (1 ~ 2499)\n\n", N);
             return 0;
         }
 
@@ -29,11 +35,17 @@ unsigned int toGscn(unsigned int SS_REF, int *Mout, int *Nout)
     }
     else if (SS_REF < 24250000)
     {
+        if (((SS_REF - 3000000) % 1440) != 0)
+        {
+            printf("ERR: illegal frequency\n\n");
+            return 0;
+        }
+
         N = ((SS_REF - 3000000) / 1440);
 
         if ((N < 0) || (N > 14756))
         {
-            printf("ERR: N %d should be (0 ~ 14756)\n", N);
+            printf("ERR: N %d should be (0 ~ 14756)\n\n", N);
             return 0;
         }
 
@@ -41,11 +53,17 @@ unsigned int toGscn(unsigned int SS_REF, int *Mout, int *Nout)
     }
     else
     {
+        if (((SS_REF - 24250080) % 17280) != 0)
+        {
+            printf("ERR: illegal frequency\n\n");
+            return 0;
+        }
+
         N = ((SS_REF - 24250080) / 17280);
 
         if ((N < 0) || (N > 4383))
         {
-            printf("ERR: N %d should be (0 ~ 4383)\n", N);
+            printf("ERR: N %d should be (0 ~ 4383)\n\n", N);
             return 0;
         }
 
@@ -82,7 +100,7 @@ unsigned int toFreq(unsigned int GSCN, int *Mout, int *Nout)
 
         if ((N < 1) || (N > 2499))
         {
-            printf("ERR: N %d should be (1 ~ 2499)\n", N);
+            printf("ERR: N %d should be (1 ~ 2499)\n\n", N);
             return 0;
         }
 
@@ -94,7 +112,7 @@ unsigned int toFreq(unsigned int GSCN, int *Mout, int *Nout)
 
         if ((N < 0) || (N > 14756))
         {
-            printf("ERR: N %d should be (0 ~ 14756)\n", N);
+            printf("ERR: N %d should be (0 ~ 14756)\n\n", N);
             return 0;
         }
 
@@ -106,7 +124,7 @@ unsigned int toFreq(unsigned int GSCN, int *Mout, int *Nout)
 
         if ((N < 0) || (N > 4383))
         {
-            printf("ERR: N %d should be (0 ~ 4383)\n", N);
+            printf("ERR: N %d should be (0 ~ 4383)\n\n", N);
             return 0;
         }
 

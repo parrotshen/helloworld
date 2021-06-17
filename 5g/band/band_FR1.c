@@ -16,7 +16,7 @@ typedef struct _tBand
     int  F_DL_high;
 
     /* Subcarrier spacing in KHz */
-    int  F_Raster[2];
+    int  F_raster[2];
     int  SSB_SCS[2];
 
     /* GSCN range */
@@ -35,8 +35,8 @@ void band_init(void)
     g_band[1].F_UL_high = 1980;
     g_band[1].F_DL_low  = 2110;
     g_band[1].F_DL_high = 2170;
-    g_band[1].F_Raster[0] = 100;
-    g_band[1].F_Raster[1] = 0;
+    g_band[1].F_raster[0] = 100;
+    g_band[1].F_raster[1] = 0;
     g_band[1].SSB_SCS[0] = 15;
     g_band[1].SSB_SCS[1] = 0;
     g_band[1].SSB_first[0] = 5279;
@@ -47,8 +47,8 @@ void band_init(void)
     g_band[2].F_UL_high = 1910;
     g_band[2].F_DL_low  = 1930;
     g_band[2].F_DL_high = 1990;
-    g_band[2].F_Raster[0] = 100;
-    g_band[2].F_Raster[1] = 0;
+    g_band[2].F_raster[0] = 100;
+    g_band[2].F_raster[1] = 0;
     g_band[2].SSB_SCS[0] = 15;
     g_band[2].SSB_SCS[1] = 0;
     g_band[2].SSB_first[0] = 4829;
@@ -59,8 +59,8 @@ void band_init(void)
     g_band[3].F_UL_high = 1785;
     g_band[3].F_DL_low  = 1805;
     g_band[3].F_DL_high = 1880;
-    g_band[3].F_Raster[0] = 100;
-    g_band[3].F_Raster[1] = 0;
+    g_band[3].F_raster[0] = 100;
+    g_band[3].F_raster[1] = 0;
     g_band[3].SSB_SCS[0] = 15;
     g_band[3].SSB_SCS[1] = 0;
     g_band[3].SSB_first[0] = 4517;
@@ -71,8 +71,8 @@ void band_init(void)
     g_band[5].F_UL_high = 849;
     g_band[5].F_DL_low  = 869;
     g_band[5].F_DL_high = 894;
-    g_band[5].F_Raster[0] = 100;
-    g_band[5].F_Raster[1] = 0;
+    g_band[5].F_raster[0] = 100;
+    g_band[5].F_raster[1] = 0;
     g_band[5].SSB_SCS[0] = 15;
     g_band[5].SSB_SCS[1] = 30;
     g_band[5].SSB_first[0] = 2177;
@@ -86,8 +86,8 @@ void band_init(void)
     g_band[7].F_UL_high = 2570;
     g_band[7].F_DL_low  = 2620;
     g_band[7].F_DL_high = 2690;
-    g_band[7].F_Raster[0] = 100;
-    g_band[7].F_Raster[1] = 0;
+    g_band[7].F_raster[0] = 100;
+    g_band[7].F_raster[1] = 0;
     g_band[7].SSB_SCS[0] = 15;
     g_band[7].SSB_SCS[1] = 0;
     g_band[7].SSB_first[0] = 6554;
@@ -98,8 +98,8 @@ void band_init(void)
     g_band[8].F_UL_high = 915;
     g_band[8].F_DL_low  = 925;
     g_band[8].F_DL_high = 960;
-    g_band[8].F_Raster[0] = 100;
-    g_band[8].F_Raster[1] = 0;
+    g_band[8].F_raster[0] = 100;
+    g_band[8].F_raster[1] = 0;
     g_band[8].SSB_SCS[0] = 15;
     g_band[8].SSB_SCS[1] = 0;
     g_band[8].SSB_first[0] = 2318;
@@ -110,8 +110,8 @@ void band_init(void)
     g_band[12].F_UL_high = 716;
     g_band[12].F_DL_low  = 729;
     g_band[12].F_DL_high = 746;
-    g_band[12].F_Raster[0] = 100;
-    g_band[12].F_Raster[1] = 0;
+    g_band[12].F_raster[0] = 100;
+    g_band[12].F_raster[1] = 0;
     g_band[12].SSB_SCS[0] = 15;
     g_band[12].SSB_SCS[1] = 0;
     g_band[12].SSB_first[0] = 1828;
@@ -122,8 +122,8 @@ void band_init(void)
     g_band[20].F_UL_high = 862;
     g_band[20].F_DL_low  = 791;
     g_band[20].F_DL_high = 821;
-    g_band[20].F_Raster[0] = 100;
-    g_band[20].F_Raster[1] = 0;
+    g_band[20].F_raster[0] = 100;
+    g_band[20].F_raster[1] = 0;
     g_band[20].SSB_SCS[0] = 15;
     g_band[20].SSB_SCS[1] = 0;
     g_band[20].SSB_first[0] = 1982;
@@ -134,8 +134,8 @@ void band_init(void)
     g_band[25].F_UL_high = 1915;
     g_band[25].F_DL_low  = 1930;
     g_band[25].F_DL_high = 1995;
-    g_band[25].F_Raster[0] = 100;
-    g_band[25].F_Raster[1] = 0;
+    g_band[25].F_raster[0] = 100;
+    g_band[25].F_raster[1] = 0;
     g_band[25].SSB_SCS[0] = 15;
     g_band[25].SSB_SCS[1] = 0;
     g_band[25].SSB_first[0] = 4829;
@@ -146,8 +146,8 @@ void band_init(void)
     g_band[28].F_UL_high = 748;
     g_band[28].F_DL_low  = 758;
     g_band[28].F_DL_high = 803;
-    g_band[28].F_Raster[0] = 100;
-    g_band[28].F_Raster[1] = 0;
+    g_band[28].F_raster[0] = 100;
+    g_band[28].F_raster[1] = 0;
     g_band[28].SSB_SCS[0] = 15;
     g_band[28].SSB_SCS[1] = 0;
     g_band[28].SSB_first[0] = 1901;
@@ -158,8 +158,8 @@ void band_init(void)
     g_band[34].F_UL_high = 2025;
     g_band[34].F_DL_low  = 2010;
     g_band[34].F_DL_high = 2025;
-    g_band[34].F_Raster[0] = 100;
-    g_band[34].F_Raster[1] = 0;
+    g_band[34].F_raster[0] = 100;
+    g_band[34].F_raster[1] = 0;
     g_band[34].SSB_SCS[0] = 15;
     g_band[34].SSB_SCS[1] = 0;
     g_band[34].SSB_first[0] = 5030;
@@ -170,8 +170,8 @@ void band_init(void)
     g_band[38].F_UL_high = 2620;
     g_band[38].F_DL_low  = 2570;
     g_band[38].F_DL_high = 2620;
-    g_band[38].F_Raster[0] = 100;
-    g_band[38].F_Raster[1] = 0;
+    g_band[38].F_raster[0] = 100;
+    g_band[38].F_raster[1] = 0;
     g_band[38].SSB_SCS[0] = 15;
     g_band[38].SSB_SCS[1] = 0;
     g_band[38].SSB_first[0] = 6431;
@@ -182,8 +182,8 @@ void band_init(void)
     g_band[39].F_UL_high = 1920;
     g_band[39].F_DL_low  = 1880;
     g_band[39].F_DL_high = 1920;
-    g_band[39].F_Raster[0] = 100;
-    g_band[39].F_Raster[1] = 0;
+    g_band[39].F_raster[0] = 100;
+    g_band[39].F_raster[1] = 0;
     g_band[39].SSB_SCS[0] = 15;
     g_band[39].SSB_SCS[1] = 0;
     g_band[39].SSB_first[0] = 4706;
@@ -194,8 +194,8 @@ void band_init(void)
     g_band[40].F_UL_high = 2400;
     g_band[40].F_DL_low  = 2300;
     g_band[40].F_DL_high = 2400;
-    g_band[40].F_Raster[0] = 100;
-    g_band[40].F_Raster[1] = 0;
+    g_band[40].F_raster[0] = 100;
+    g_band[40].F_raster[1] = 0;
     g_band[40].SSB_SCS[0] = 15;
     g_band[40].SSB_SCS[1] = 0;
     g_band[40].SSB_first[0] = 5756;
@@ -206,8 +206,8 @@ void band_init(void)
     g_band[41].F_UL_high = 2690;
     g_band[41].F_DL_low  = 2496;
     g_band[41].F_DL_high = 2690;
-    g_band[41].F_Raster[0] = 15;
-    g_band[41].F_Raster[1] = 30;
+    g_band[41].F_raster[0] = 15;
+    g_band[41].F_raster[1] = 30;
     g_band[41].SSB_SCS[0] = 15;
     g_band[41].SSB_first[0] = 6246;
     g_band[41].SSB_last[0]  = 6717;
@@ -221,8 +221,8 @@ void band_init(void)
     g_band[50].F_UL_high = 1517;
     g_band[50].F_DL_low  = 1432;
     g_band[50].F_DL_high = 1517;
-    g_band[50].F_Raster[0] = 100;
-    g_band[50].F_Raster[1] = 0;
+    g_band[50].F_raster[0] = 100;
+    g_band[50].F_raster[1] = 0;
     g_band[50].SSB_SCS[0] = 15;
     g_band[50].SSB_SCS[1] = 0;
     g_band[50].SSB_first[0] = 3584;
@@ -233,8 +233,8 @@ void band_init(void)
     g_band[51].F_UL_high = 1432;
     g_band[51].F_DL_low  = 1427;
     g_band[51].F_DL_high = 1432;
-    g_band[51].F_Raster[0] = 100;
-    g_band[51].F_Raster[1] = 0;
+    g_band[51].F_raster[0] = 100;
+    g_band[51].F_raster[1] = 0;
     g_band[51].SSB_SCS[0] = 15;
     g_band[51].SSB_SCS[1] = 0;
     g_band[51].SSB_first[0] = 3572;
@@ -245,8 +245,8 @@ void band_init(void)
     g_band[65].F_UL_high = 2010;
     g_band[65].F_DL_low  = 2110;
     g_band[65].F_DL_high = 2200;
-    g_band[65].F_Raster[0] = 100;
-    g_band[65].F_Raster[1] = 0;
+    g_band[65].F_raster[0] = 100;
+    g_band[65].F_raster[1] = 0;
     g_band[65].SSB_SCS[0] = 15;
     g_band[65].SSB_SCS[1] = 0;
     g_band[65].SSB_first[0] = 5279;
@@ -257,8 +257,8 @@ void band_init(void)
     g_band[66].F_UL_high = 1780;
     g_band[66].F_DL_low  = 2110;
     g_band[66].F_DL_high = 2200;
-    g_band[66].F_Raster[0] = 100;
-    g_band[66].F_Raster[1] = 0;
+    g_band[66].F_raster[0] = 100;
+    g_band[66].F_raster[1] = 0;
     g_band[66].SSB_SCS[0] = 15;
     g_band[66].SSB_first[0] = 5279;
     g_band[66].SSB_last[0]  = 5494;
@@ -272,8 +272,8 @@ void band_init(void)
     g_band[70].F_UL_high = 1710;
     g_band[70].F_DL_low  = 1995;
     g_band[70].F_DL_high = 2020;
-    g_band[70].F_Raster[0] = 100;
-    g_band[70].F_Raster[1] = 0;
+    g_band[70].F_raster[0] = 100;
+    g_band[70].F_raster[1] = 0;
     g_band[70].SSB_SCS[0] = 15;
     g_band[70].SSB_SCS[1] = 0;
     g_band[70].SSB_first[0] = 4993;
@@ -284,8 +284,8 @@ void band_init(void)
     g_band[71].F_UL_high = 698;
     g_band[71].F_DL_low  = 617;
     g_band[71].F_DL_high = 652;
-    g_band[71].F_Raster[0] = 100;
-    g_band[71].F_Raster[1] = 0;
+    g_band[71].F_raster[0] = 100;
+    g_band[71].F_raster[1] = 0;
     g_band[71].SSB_SCS[0] = 15;
     g_band[71].SSB_SCS[1] = 0;
     g_band[71].SSB_first[0] = 1547;
@@ -296,8 +296,8 @@ void band_init(void)
     g_band[74].F_UL_high = 1470;
     g_band[74].F_DL_low  = 1475;
     g_band[74].F_DL_high = 1518;
-    g_band[74].F_Raster[0] = 100;
-    g_band[74].F_Raster[1] = 0;
+    g_band[74].F_raster[0] = 100;
+    g_band[74].F_raster[1] = 0;
     g_band[74].SSB_SCS[0] = 15;
     g_band[74].SSB_SCS[1] = 0;
     g_band[74].SSB_first[0] = 3692;
@@ -306,8 +306,8 @@ void band_init(void)
     /* n75 */
     g_band[75].F_DL_low  = 1432;
     g_band[75].F_DL_high = 1517;
-    g_band[75].F_Raster[0] = 100;
-    g_band[75].F_Raster[1] = 0;
+    g_band[75].F_raster[0] = 100;
+    g_band[75].F_raster[1] = 0;
     g_band[75].SSB_SCS[0] = 15;
     g_band[75].SSB_SCS[1] = 0;
     g_band[75].SSB_first[0] = 3584;
@@ -316,8 +316,8 @@ void band_init(void)
     /* n76 */
     g_band[76].F_DL_low  = 1427;
     g_band[76].F_DL_high = 1432;
-    g_band[76].F_Raster[0] = 100;
-    g_band[76].F_Raster[1] = 0;
+    g_band[76].F_raster[0] = 100;
+    g_band[76].F_raster[1] = 0;
     g_band[76].SSB_SCS[0] = 15;
     g_band[76].SSB_SCS[1] = 0;
     g_band[76].SSB_first[0] = 3572;
@@ -328,8 +328,8 @@ void band_init(void)
     g_band[77].F_UL_high = 4200;
     g_band[77].F_DL_low  = 3300;
     g_band[77].F_DL_high = 4200;
-    g_band[77].F_Raster[0] = 15;
-    g_band[77].F_Raster[1] = 30;
+    g_band[77].F_raster[0] = 15;
+    g_band[77].F_raster[1] = 30;
     g_band[77].SSB_SCS[0] = 30;
     g_band[77].SSB_SCS[1] = 0;
     g_band[77].SSB_first[0] = 7711;
@@ -340,8 +340,8 @@ void band_init(void)
     g_band[78].F_UL_high = 3800;
     g_band[78].F_DL_low  = 3300;
     g_band[78].F_DL_high = 3800;
-    g_band[78].F_Raster[0] = 15;
-    g_band[78].F_Raster[1] = 30;
+    g_band[78].F_raster[0] = 15;
+    g_band[78].F_raster[1] = 30;
     g_band[78].SSB_SCS[0] = 30;
     g_band[78].SSB_SCS[1] = 0;
     g_band[78].SSB_first[0] = 7711;
@@ -352,8 +352,8 @@ void band_init(void)
     g_band[79].F_UL_high = 5000;
     g_band[79].F_DL_low  = 4400;
     g_band[79].F_DL_high = 5000;
-    g_band[79].F_Raster[0] = 15;
-    g_band[79].F_Raster[1] = 30;
+    g_band[79].F_raster[0] = 15;
+    g_band[79].F_raster[1] = 30;
     g_band[79].SSB_SCS[0] = 30;
     g_band[79].SSB_SCS[1] = 0;
     g_band[79].SSB_first[0] = 8480;
@@ -362,33 +362,33 @@ void band_init(void)
     /* n80 */
     g_band[80].F_UL_low  = 1710;
     g_band[80].F_UL_high = 1785;
-    g_band[80].F_Raster[0] = 100;
-    g_band[80].F_Raster[1] = 0;
+    g_band[80].F_raster[0] = 100;
+    g_band[80].F_raster[1] = 0;
     /* n81 */
     g_band[81].F_UL_low  = 880;
     g_band[81].F_UL_high = 915;
-    g_band[81].F_Raster[0] = 100;
-    g_band[81].F_Raster[1] = 0;
+    g_band[81].F_raster[0] = 100;
+    g_band[81].F_raster[1] = 0;
     /* n82 */
     g_band[82].F_UL_low  = 832;
     g_band[82].F_UL_high = 862;
-    g_band[82].F_Raster[0] = 100;
-    g_band[82].F_Raster[1] = 0;
+    g_band[82].F_raster[0] = 100;
+    g_band[82].F_raster[1] = 0;
     /* n83 */
     g_band[83].F_UL_low  = 703;
     g_band[83].F_UL_high = 748;
-    g_band[83].F_Raster[0] = 100;
-    g_band[83].F_Raster[1] = 0;
+    g_band[83].F_raster[0] = 100;
+    g_band[83].F_raster[1] = 0;
     /* n84 */
     g_band[84].F_UL_low  = 1920;
     g_band[84].F_UL_high = 1980;
-    g_band[84].F_Raster[0] = 100;
-    g_band[84].F_Raster[1] = 0;
+    g_band[84].F_raster[0] = 100;
+    g_band[84].F_raster[1] = 0;
     /* n86 */
     g_band[86].F_UL_low  = 1710;
     g_band[86].F_UL_high = 1780;
-    g_band[86].F_Raster[0] = 100;
-    g_band[86].F_Raster[1] = 0;
+    g_band[86].F_raster[0] = 100;
+    g_band[86].F_raster[1] = 0;
 }
 
 int bw2rb(int band, int bw, int scs)
@@ -560,7 +560,7 @@ int bw2rb(int band, int bw, int scs)
             }
         }
     }
-    if (30 == scs)
+    else if (30 == scs)
     {
         if (5 == bw)
         {
@@ -754,7 +754,7 @@ int bw2rb(int band, int bw, int scs)
             }
         }
     }
-    if (60 == scs)
+    else if (60 == scs)
     {
         if (10 == bw)
         {
@@ -931,25 +931,25 @@ int bw2rb(int band, int bw, int scs)
 }
 
 void show_frequency(
-    double SS_REF,    /* KHz */
-    double ss_low,    /* KHz */
-    double ss_high,   /* KHz */
-    int    ss_raster, /* KHz */
-    int    F_DL_low,  /* MHz */
-    int    F_DL_high, /* MHz */
-    int    F_Raster[2],
-    int    centFreq,  /* KHz */
-    int    BW,
-    int    N_RB,
-    int    SCS
+    unsigned int SS_REF,    /* KHz */
+    unsigned int ss_low,    /* KHz */
+    unsigned int ss_high,   /* KHz */
+    int          ss_raster, /* KHz */
+    int          F_DL_low,  /* MHz */
+    int          F_DL_high, /* MHz */
+    int          F_raster[2],
+    unsigned int centFreq,  /* KHz */
+    int          BW,
+    int          N_RB,
+    int          SCS
 )
 {
     char raster[20];
-    int F_REF;
-    double f_low;
-    double f_high;
-    double rb_low;
-    double rb_high;
+    unsigned int F_REF;   /* KHz */
+    unsigned int f_low;   /* KHz */
+    unsigned int f_high;  /* KHz */
+    unsigned int rb_low;  /* KHz */
+    unsigned int rb_high; /* KHz */
     int N_SSB_CRB;
     int k_SSB;
     int count;
@@ -957,28 +957,28 @@ void show_frequency(
     int i;
 
 
-    printf("======================================================================\n");
-    printf("             Frequency (KHz)         | N_SSB_CRB | k_SSB | Raster \n");
-    printf("======================================================================\n");
+    printf("==============================================================\n");
+    printf("       Frequency (KHz)       | N_SSB_CRB | k_SSB | Raster \n");
+    printf("==============================================================\n");
     printf(
-        "[1;36mSSB[0m %.2f [1;33m%.2f[0m %.2f |           |       | %d KHz\n",
+        "[1;36m SSB[0m %u [1;33m%u[0m %u |           |       | %d KHz\n",
         ss_low,
         SS_REF,
         ss_high,
         ss_raster
     );
-    printf("-------------------------------------+-----------+-------+------------\n");
+    printf("-----------------------------+-----------+-------+------------\n");
     found = 0;
     for (i=0; i<2; i++)
     {
-        if (0 == F_Raster[i]) continue;
+        if (0 == F_raster[i]) continue;
 
         count = 0;
-        sprintf(raster, "%d KHz", F_Raster[i]);
+        sprintf(raster, "%d KHz", F_raster[i]);
 
         for (F_REF  = (F_DL_low * 1000);
              F_REF <= (F_DL_high * 1000);
-             F_REF += F_Raster[i])
+             F_REF += F_raster[i])
         {
             f_low  = (F_REF - ((BW * 1000) / 2));
             f_high = (F_REF + ((BW * 1000) / 2));
@@ -996,14 +996,15 @@ void show_frequency(
             {
                 #if 0
                 printf(
-                    "    %.2f %.2f %.2f\n",
+                    "    %u %u %u (%d)\n",
                     rb_low,
-                    (double)F_REF,
-                    rb_high
+                    F_REF,
+                    rb_high,
+                    ((ss_low - rb_low) % 15)
                 );
                 continue;
                 #endif
-                if (0 == ((int)(ss_low - rb_low) % 15))
+                if (0 == ((ss_low - rb_low) % 15))
                 {
                     int offset = ((int)(ss_low - rb_low) / 15);
                     int sub = ((SCS / 15) * 12);
@@ -1014,9 +1015,9 @@ void show_frequency(
                         if (centFreq == F_REF)
                         {
                             printf(
-                                "[1;36mCRB[0m %.2f [1;33m%.2f[0m %.2f |    %4d   |   %2d  | %s\n",
+                                "[1;36m CRB[0m %u [1;33m%u[0m %u |    %4d   |   %2d  | %s\n",
                                 rb_low,
-                                (double)F_REF,
+                                F_REF,
                                 rb_high,
                                 N_SSB_CRB,
                                 k_SSB,
@@ -1030,10 +1031,10 @@ void show_frequency(
                     else
                     {
                         printf(
-                            "[1;36m%s[0m %.2f %.2f %.2f |    %4d   |   %2d  | %s\n",
+                            "[1;36m %s[0m %u %u %u |    %4d   |   %2d  | %s\n",
                             ((count == 0) ? "CRB" : "   "),
                             rb_low,
-                            (double)F_REF,
+                            F_REF,
                             rb_high,
                             N_SSB_CRB,
                             k_SSB,
@@ -1046,12 +1047,12 @@ void show_frequency(
         }
         if (count > 0)
         {
-            printf("-------------------------------------+-----------+-------+------------\n");
+            printf("-----------------------------+-----------+-------+------------\n");
         }
     }
     if ((centFreq > 0) && (0 == found))
     {
-        printf("\n%.2f KHz is not an available center frequency\n", (double)centFreq);
+        printf("\n%u KHz is not an available center frequency\n", centFreq);
     }
     printf("\n");
 }
@@ -1065,7 +1066,7 @@ void help(void)
     printf("        50, 51, 65, 66, 70, 71, 74, 77, 78, 79)\n");
     printf("  -w   Bandwidth in MHz.\n");
     printf("       (5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100)\n");
-    printf("  -f   Center frequency in KHz.\n");
+    printf("  -f   Center frequency in KHz (410000 ~ 7125000).\n");
     printf("  -s   Subcarrier spacing (15, 30, 60 KHz).\n");
     printf("  -g   GSCN (2 ~ 7498, 7499 ~ 22255).\n");
     printf("  -r   SS Block raster (15, 30 KHz).\n");
@@ -1078,14 +1079,14 @@ void help(void)
 /* 38.104 Section 5.4.3 Synchronization raster */
 int main(int argc, char *argv[])
 {
-    double SS_REF;
-    double ss_low;
-    double ss_high;
-    int centFreq = 0;
+    unsigned int SS_REF;  /* KHz */
+    unsigned int ss_low;  /* KHz */
+    unsigned int ss_high; /* KHz */
+    unsigned int centFreq = 0; /* KHz */
     int band = 1;
     int GSCN = 5280;
     int BW = 5;
-    int SCS = 15;  // subCarrierSpacingCommon
+    int SCS = 15;  /* subCarrierSpacingCommon */
     int ss_raster = 15;
     int g = 0;
     int N_RB;
@@ -1110,7 +1111,7 @@ int main(int argc, char *argv[])
                 BW = atoi( optarg );
                 break;
             case 'f':
-                centFreq = atoi( optarg );
+                centFreq = (unsigned int)atoi( optarg );
                 break;
             case 's':
                 SCS = atoi( optarg );
@@ -1224,7 +1225,7 @@ int main(int argc, char *argv[])
             ss_raster,
             g_band[n].F_DL_low,
             g_band[n].F_DL_high,
-            g_band[n].F_Raster,
+            g_band[n].F_raster,
             centFreq,
             BW,
             N_RB,
@@ -1234,7 +1235,7 @@ int main(int argc, char *argv[])
     else if ((GSCN >= 7499) && (GSCN <= 22255))
     {
         N = (GSCN - 7499);
-        SS_REF  = ((3000 + (N * 1.44)) * 1000);  /* KHz */
+        SS_REF  = (3000000 + (N * 1440));  /* KHz */
         ss_low  = (SS_REF - (ss_raster * 120));
         ss_high = (SS_REF + (ss_raster * 120));
         show_frequency(
@@ -1244,7 +1245,7 @@ int main(int argc, char *argv[])
             ss_raster,
             g_band[n].F_DL_low,
             g_band[n].F_DL_high,
-            g_band[n].F_Raster,
+            g_band[n].F_raster,
             centFreq,
             BW,
             N_RB,

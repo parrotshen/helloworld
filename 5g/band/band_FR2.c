@@ -10,14 +10,12 @@
 
 typedef struct _tBand
 {
-    /* Operating frequency in MHz */
-    int  F_UL_low;
-    int  F_UL_high;
-    int  F_DL_low;
-    int  F_DL_high;
+    /* Operating frequency in KHz */
+    int  F_low[2];
+    int  F_high[2];
 
     /* Subcarrier spacing in KHz */
-    int  F_Raster[2];
+    int  F_raster[2];
     int  SSB_SCS[2];
 
     /* GSCN range */
@@ -32,12 +30,12 @@ void band_init(void)
 {
     memset(&(g_band[0]), 0, (sizeof( tBand ) * 100));
     /* n257 */
-    g_band[257].F_UL_low  = 26500;
-    g_band[257].F_UL_high = 29500;
-    g_band[257].F_DL_low  = 26500;
-    g_band[257].F_DL_high = 29500;
-    g_band[257].F_Raster[0] = 60;
-    g_band[257].F_Raster[1] = 120;
+    g_band[257].F_low[0]  = 26500020;
+    g_band[257].F_low[1]  = 26500080;
+    g_band[257].F_high[0] = 29499960;
+    g_band[257].F_high[1] = 29499960;
+    g_band[257].F_raster[0] = 60;
+    g_band[257].F_raster[1] = 120;
     g_band[257].SSB_SCS[0] = 120;
     g_band[257].SSB_SCS[1] = 240;
     g_band[257].SSB_first[0] = 22388;
@@ -47,12 +45,12 @@ void band_init(void)
     g_band[257].SSB_step[0]  = 1;
     g_band[257].SSB_step[1]  = 2;
     /* n258 */
-    g_band[258].F_UL_low  = 24250;
-    g_band[258].F_UL_high = 27500;
-    g_band[258].F_DL_low  = 24250;
-    g_band[258].F_DL_high = 27500;
-    g_band[258].F_Raster[0] = 60;
-    g_band[258].F_Raster[1] = 120;
+    g_band[258].F_low[0]  = 24250080;
+    g_band[258].F_low[1]  = 24250080;
+    g_band[258].F_high[0] = 27499980;
+    g_band[258].F_high[1] = 27499920;
+    g_band[258].F_raster[0] = 60;
+    g_band[258].F_raster[1] = 120;
     g_band[258].SSB_SCS[0] = 120;
     g_band[258].SSB_SCS[1] = 240;
     g_band[258].SSB_first[0] = 22257;
@@ -62,12 +60,12 @@ void band_init(void)
     g_band[258].SSB_step[0]  = 1;
     g_band[258].SSB_step[1]  = 2;
     /* n260 */
-    g_band[260].F_UL_low  = 37000;
-    g_band[260].F_UL_high = 40000;
-    g_band[260].F_DL_low  = 37000;
-    g_band[260].F_DL_high = 40000;
-    g_band[260].F_Raster[0] = 60;
-    g_band[260].F_Raster[1] = 120;
+    g_band[260].F_low[0]  = 37000020;
+    g_band[260].F_low[1]  = 37000080;
+    g_band[260].F_high[0] = 39999960;
+    g_band[260].F_high[1] = 39999960;
+    g_band[260].F_raster[0] = 60;
+    g_band[260].F_raster[1] = 120;
     g_band[260].SSB_SCS[0] = 120;
     g_band[260].SSB_SCS[1] = 240;
     g_band[260].SSB_first[0] = 22995;
@@ -77,12 +75,12 @@ void band_init(void)
     g_band[260].SSB_step[0]  = 1;
     g_band[260].SSB_step[1]  = 2;
     /* n261 */
-    g_band[261].F_UL_low  = 27500;
-    g_band[261].F_UL_high = 28350;
-    g_band[261].F_DL_low  = 27500;
-    g_band[261].F_DL_high = 28350;
-    g_band[261].F_Raster[0] = 60;
-    g_band[261].F_Raster[1] = 120;
+    g_band[261].F_low[0]  = 27500040;
+    g_band[261].F_low[1]  = 27500040;
+    g_band[261].F_high[0] = 28350000;
+    g_band[261].F_high[1] = 28350000;
+    g_band[261].F_raster[0] = 60;
+    g_band[261].F_raster[1] = 120;
     g_band[261].SSB_SCS[0] = 120;
     g_band[261].SSB_SCS[1] = 240;
     g_band[261].SSB_first[0] = 22446;
@@ -130,7 +128,7 @@ int bw2rb(int band, int bw, int scs)
             }
         }
     }
-    if (120 == scs)
+    else if (120 == scs)
     {
         if (50 == bw)
         {
@@ -178,30 +176,30 @@ int bw2rb(int band, int bw, int scs)
 }
 
 void show_frequency(
-    double SS_REF,    /* MHz */
-    double ss_low,    /* MHz */
-    double ss_high,   /* MHz */
-    int    ss_raster, /* KHz */
-    int    F_DL_low,  /* MHz */
-    int    F_DL_high, /* MHz */
-    int    F_Raster[2],
-    double centFreq,  /* MHz */
-    int    BW,
-    int    N_RB,
-    int    SCS
+    unsigned int SS_REF,    /* KHz */
+    unsigned int ss_low,    /* KHz */
+    unsigned int ss_high,   /* KHz */
+    int          ss_raster, /* KHz */
+    int          F_low[2],  /* KHz */
+    int          F_high[2], /* KHz */
+    int          F_raster[2],
+    unsigned int centFreq,  /* MHz */
+    int          BW,
+    int          N_RB,
+    int          SCS,
+    int          j
 )
 {
     char raster[20];
-    double F_REF;
-    double f_low;
-    double f_high;
-    double rb_low;
-    double rb_high;
+    unsigned int F_REF;   /* KHz */
+    unsigned int f_low;   /* KHz */
+    unsigned int f_high;  /* KHz */
+    unsigned int rb_low;  /* KHz */
+    unsigned int rb_high; /* KHz */
     int N_SSB_CRB;
     int k_SSB;
     int count;
     int found;
-    int i;
 
 
     printf("================================================================\n");
@@ -209,60 +207,58 @@ void show_frequency(
     printf("================================================================\n");
     printf(
         "[1;36mSSB[0m %.2f [1;33m%.2f[0m %.2f |           |       | %d KHz\n",
-        ss_low,
-        SS_REF,
-        ss_high,
+        ((double)ss_low / 1000),
+        ((double)SS_REF / 1000),
+        ((double)ss_high / 1000),
         ss_raster
        );
     printf("-------------------------------+-----------+-------+------------\n");
     found = 0;
-    for (i=0; i<2; i++)
     {
         count = 0;
-        sprintf(raster, "%d KHz", F_Raster[i]);
+        sprintf(raster, "%d KHz", F_raster[j]);
 
-        for (F_REF  = F_DL_low;
-             F_REF <= F_DL_high;
-             F_REF += ((double)F_Raster[i] / 1000))
+        for (F_REF = F_low[j]; F_REF <= F_high[j]; F_REF += F_raster[j])
         {
-            f_low  = (F_REF - (BW / 2));
-            f_high = (F_REF + (BW / 2));
+            f_low  = (F_REF - ((BW * 1000) / 2));
+            f_high = (F_REF + ((BW * 1000) / 2));
             if (1 == (N_RB % 2))
             {
-                rb_low  = (F_REF - ((double)(((DIV_FLOOR(N_RB, 2) * 12) + 6) * SCS) / 1000));
-                rb_high = (F_REF + ((double)(((DIV_FLOOR(N_RB, 2) * 12) + 6) * SCS) / 1000));
+                rb_low  = (F_REF - (((DIV_FLOOR(N_RB, 2) * 12) + 6) * SCS));
+                rb_high = (F_REF + (((DIV_FLOOR(N_RB, 2) * 12) + 6) * SCS));
             }
             else
             {
-                rb_low  = (F_REF - ((double)((DIV_FLOOR(N_RB, 2) * 12) * SCS) / 1000));
-                rb_high = (F_REF + ((double)((DIV_FLOOR(N_RB, 2) * 12) * SCS) / 1000));
+                rb_low  = (F_REF - ((DIV_FLOOR(N_RB, 2) * 12) * SCS));
+                rb_high = (F_REF + ((DIV_FLOOR(N_RB, 2) * 12) * SCS));
             }
             if ((rb_low <= ss_low) && (ss_high <= rb_high))
             {
                 #if 0
                 printf(
-                    "    %.2f %.2f %.2f\n",
+                    "    %u %u %u (%d)\n",
                     rb_low,
                     F_REF,
-                    rb_high
+                    rb_high,
+                    ((ss_low - rb_low) % SCS)
                 );
                 continue;
                 #endif
-                if (0 == (((int)(ss_low - rb_low) * 1000) % SCS))
+                if (0 == ((ss_low - rb_low) % SCS))
                 {
-                    int offset = (((int)(ss_low - rb_low) * 1000) / 60);
+                    int offset = ((ss_low - rb_low) / 60);
                     int sub = ((SCS / 60) * 12);
                     N_SSB_CRB = ((offset / sub) * (SCS / 60));
                     k_SSB = (offset % sub);
-                    if (centFreq > 0.0)
+                    if (centFreq > 0)
                     {
-                        if (fabs(centFreq - F_REF) < 0.00001)
+                        if ((centFreq * 1000) == F_REF)
                         {
                             printf(
                                 "[1;36mCRB[0m %.2f [1;33m%.2f[0m %.2f |    %4d   |   %2d  | %s\n",
-                                rb_low,
-                                F_REF,
-                                rb_high,
+                                ((double)rb_low / 1000),
+                                ((double)F_REF / 1000),
+                                ((double)rb_high / 1000),
                                 N_SSB_CRB,
                                 k_SSB,
                                 raster
@@ -277,9 +273,9 @@ void show_frequency(
                         printf(
                             "[1;36m%s[0m %.2f %.2f %.2f |    %4d   |   %2d  | %s\n",
                             ((count == 0) ? "CRB" : "   "),
-                            rb_low,
-                            F_REF,
-                            rb_high,
+                            ((double)rb_low / 1000),
+                            ((double)F_REF / 1000),
+                            ((double)rb_high / 1000),
                             N_SSB_CRB,
                             k_SSB,
                             ((count == 0) ? raster : "")
@@ -294,9 +290,9 @@ void show_frequency(
             printf("-------------------------------+-----------+-------+------------\n");
         }
     }
-    if ((centFreq > 0.0) && (0 == found))
+    if ((centFreq > 0) && (0 == found))
     {
-        printf("\n%.2f MHz is not an available center frequency\n", centFreq);
+        printf("\n%u MHz is not an available center frequency\n", centFreq);
     }
     printf("\n");
 }
@@ -307,10 +303,11 @@ void help(void)
     printf("\n");
     printf("  -b   NR operating band (257, 258, 260, 261).\n");
     printf("  -w   Bandwidth in MHz (50, 100, 200, 400).\n");
-    printf("  -f   Center frequency in MHz.\n");
+    printf("  -f   Center frequency in MHz (24250 ~ 52600).\n");
     printf("  -s   Subcarrier spacing (60, 120 KHz).\n");
     printf("  -g   GSCN (22256 ~ 26639).\n");
     printf("  -r   SS Block raster (120, 240 KHz).\n");
+    printf("  -d   Delta-F raster (60, 120 KHz).\n");
     printf("  -h   Show the help message.\n");
     printf("\n");
 }
@@ -318,27 +315,29 @@ void help(void)
 /* 38.104 Section 5.4.3 Synchronization raster */
 int main(int argc, char *argv[])
 {
-    double SS_REF;
-    double ss_low;
-    double ss_high;
-    double centFreq = 0.0;
+    unsigned int SS_REF;  /* KHz */
+    unsigned int ss_low;  /* KHz */
+    unsigned int ss_high; /* KHz */
+    unsigned int centFreq = 0; /* MHz */
     int band = 257;
     int GSCN = 22388;
     int BW = 50;
-    int SCS = 120;  // subCarrierSpacingCommon
+    int SCS = 60;  /* subCarrierSpacingCommon */
     int ss_raster = 120;
+    int f_raster = 60;
     int g = 0;
     int N_RB;
     int N;
     int n;
     int i;
+    int j;
     int ch;
 
 
     band_init();
 
     opterr = 0;
-    while ((ch=getopt(argc, argv, "b:w:f:s:g:r:h")) != -1)
+    while ((ch=getopt(argc, argv, "b:w:f:s:g:r:d:h")) != -1)
     {
         switch ( ch )
         {
@@ -349,7 +348,7 @@ int main(int argc, char *argv[])
                 BW = atoi( optarg );
                 break;
             case 'f':
-                centFreq = (double)atof( optarg );
+                centFreq = (unsigned int)atoi( optarg );
                 break;
             case 's':
                 SCS = atoi( optarg );
@@ -359,6 +358,9 @@ int main(int argc, char *argv[])
                 break;
             case 'r':
                 ss_raster = atoi( optarg );
+                break;
+            case 'd':
+                f_raster = atoi( optarg );
                 break;
             case 'h':
             default:
@@ -389,6 +391,22 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    for (j=0; j<2; j++)
+    {
+        //printf("g_band[%d].F_raster[%d] = %d\n", n, j, g_band[n].F_raster[j]);
+        if ((g_band[n].F_raster[j] > 0) &&
+            (g_band[n].F_raster[j] == f_raster))
+        {
+            break;
+        }
+    }
+    if (j > 1)
+    {
+        printf("ERR: wrong Delta-F raster %d KHz\n", f_raster);
+        return 0;
+    }
+
+
     GSCN = ((g > 0) ? g : g_band[n].SSB_first[i]);
     if ((GSCN < g_band[n].SSB_first[i]) || (GSCN > g_band[n].SSB_last[i]))
     {
@@ -404,34 +422,36 @@ int main(int argc, char *argv[])
     }
 
     printf("[ Band [1;31m%d[0m ]\n", band);
-    printf("  Range: %d ~ %d MHz (%d MHz)\n",
-        g_band[n].F_DL_low,
-        g_band[n].F_DL_high,
-        (g_band[n].F_DL_high - g_band[n].F_DL_low)
+    printf("  Range  : %.2f ~ %.2f MHz (%.2f MHz)\n",
+        ((double)g_band[n].F_low[0] / 1000),
+        ((double)g_band[n].F_high[0] / 1000),
+        ((double)(g_band[n].F_high[0] - g_band[n].F_low[0]) / 1000)
     );
-    printf("  BW   : %d MHz (%d RBs)\n", BW, N_RB);
-    printf("  SCS  : %d KHz\n", SCS);
-    printf("  GSCN : %d\n", GSCN);
+    printf("  Delta-F: %d KHz\n", f_raster);
+    printf("  BW     : %d MHz (%d RBs)\n", BW, N_RB);
+    printf("  SCS    : %d KHz\n", SCS);
+    printf("  GSCN   : %d\n", GSCN);
     printf("\n");
 
     if ((GSCN >= 22256) && (GSCN <= 26639))
     {
         N = (GSCN - 22256);
-        SS_REF  = (24250.08 + (N * 17.28));  /* MHz */
-        ss_low  = (SS_REF - ((double)(ss_raster * 120) / 1000));
-        ss_high = (SS_REF + ((double)(ss_raster * 120) / 1000));
+        SS_REF  = (24250080 + (N * 17280));  /* KHz */
+        ss_low  = (SS_REF - (ss_raster * 120));
+        ss_high = (SS_REF + (ss_raster * 120));
         show_frequency(
             SS_REF,
             ss_low,
             ss_high,
             ss_raster,
-            g_band[n].F_DL_low,
-            g_band[n].F_DL_high,
-            g_band[n].F_Raster,
+            g_band[n].F_low,
+            g_band[n].F_high,
+            g_band[n].F_raster,
             centFreq,
             BW,
             N_RB,
-            SCS
+            SCS,
+            j
         );
     }
     else

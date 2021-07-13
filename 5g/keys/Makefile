@@ -16,6 +16,7 @@ SRC += k_rrc_int.c
 SRC += k_rrc_enc.c
 SRC += k_up_enc.c
 SRC += k_up_int.c
+SRC += k_ng_ran_star.c
 
 OBJ = $(SRC:.c=.o)
 

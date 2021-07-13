@@ -8,6 +8,7 @@ K
                      ==> K_NAS_int, K_NAS_enc
                      ==> K_gNB, NH
                           ==> K_RRC_int, K_RRC_enc, K_UP_int, K_UP_enc
+                          ==> K_NG_RAN_star
 
 K        : 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 RAND     : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -57,3 +58,16 @@ Algorithm type    : 4
 Algorithm identity: 2 (128-5G-IA2)
 K_RRC_int: 6D 1A 1A 3F F5 4D 89 E7 C6 2C 32 EB FE 22 71 C5
 
+Algorithm type    : 5
+Algorithm identity: 2 (128-5G-EA2)
+K_UP_enc : FB 41 3E 52 B2 15 4E 60 31 1F B3 A5 AE 9B C6 F5
+
+Algorithm type    : 6
+Algorithm identity: 2 (128-5G-IA2)
+K_UP_int : 4B 43 D9 17 3D 1C 38 5A 29 38 E9 FC 74 B6 E8 B9
+
+PCI      : 0
+ARFCN-DL : 630400 (3456000 KHz)
+K_NG_RAN_star
+         : 62 68 14 23 78 18 36 BA 89 9A 54 48 CC E5 2B ED
+         : 15 F7 C7 C9 8B 34 C9 A9 52 8E 27 7E 3B 19 D4 EA

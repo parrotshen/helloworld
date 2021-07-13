@@ -78,6 +78,9 @@ uint32 NAS_COUNT = 0;
 int NIAx = ID_128_NIA2;
 int NEAx = ID_128_NEA2;
 
+uint16 PCI = 0;
+uint32 ARFCN = 630400;
+
 
 extern void xres_star(
     uint8  XRES_STAR[16], // OUT
@@ -165,6 +168,13 @@ extern void k_up_enc(
     uint8  NEAx          // IN
 );
 
+extern void k_ng_ran_star(
+    uint8  K_NG_RAN_STAR[32], // OUT
+    uint8  K_gNB[32],         // IN
+    uint16 PCI,               // IN
+    uint32 ARFCN              // IN
+);
+
 int main(void)
 {
     uint8  XRES_STAR[16];
@@ -180,6 +190,7 @@ int main(void)
     uint8  K_RRC_INT[16];
     uint8  K_UP_ENC[16];
     uint8  K_UP_INT[16];
+    uint8  K_NG_RAN_STAR[32];
 
 
     xres_star(XRES_STAR, XRES, 16, _RAND, CK, IK, SNN);
@@ -207,6 +218,8 @@ int main(void)
     k_up_enc(K_UP_ENC, K_gNB, NEAx);
 
     k_up_int(K_UP_INT, K_gNB, NIAx);
+
+    k_ng_ran_star(K_NG_RAN_STAR, K_gNB, PCI, ARFCN);
 
 
     return 0;

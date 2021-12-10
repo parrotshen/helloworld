@@ -1,0 +1,6 @@
+#set solib-search-path /usr/lib
+dir inc src
+path src
+list main
+br morse_code
+info break

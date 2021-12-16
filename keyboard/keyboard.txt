@@ -1,0 +1,62 @@
+Keycode defined in $KERNEL_SRC_DIR/include/linux/input.h
+
+===========================================================================
+Key             Code   |   Key             Code  |   Key             Code
+===========================================================================
+Esc             1      |   F1              59    |   Num Lock        69
+1               2      |   F2              60    |   Scroll Lock     70
+2               3      |   F3              61    |   P7              71
+3               4      |   F4              62    |   P8              72
+4               5      |   F5              63    |   P9              73
+5               6      |   F6              64    |   P-              74
+6               7      |   F7              65    |   P4              75
+7               8      |   F8              66    |   P5              76
+8               9      |   F9              67    |   P6              77
+9               10     |   F10             68    |   P+              78
+0               11     |   Num Lock        69    |   P1              79
+-               12     |   Scroll Lock     70    |   P2              70
+=               13     |   P7              71    |   P3              81
+Back Space      14     |   P8              72    |   P0              82
+Tab             15     |   P9              73    |   P.              83
+Q               16     |   P-              74    |   F11             87
+W               17     |   P4              75    |   F12             88
+E               18     |   P5              76    |   F11             87
+R               19     |   P6              77    |   PEnter          96
+T               10     |   P+              78    |   Ctrl (R)        97
+Y               21     |   P1              79    |   P/              98
+U               22     |   P2              70    |   Print Screen    99
+I               23     |   P3              81    |   Alt (R)         100
+O               24     |   P0              82    |   Home            102
+P               25     |   P.              83    |   Up              103
+[               26     |                         |   Page Up         104
+]               27     |                         |   Left            105
+Enter           28     |                         |   Right           106
+Ctrl (L)        29     |                         |   End             107
+A               30     |                         |   Down            108
+S               31     |                         |   Page Down       109
+D               32     |                         |   Insert          110
+F               33     |                         |   Delete          111
+G               34     |                         |   Pause           119
+H               35     |
+J               36     |
+K               37     |
+L               38     |
+;               39     |
+'               40     |
+Shift (L)       42     |
+\               43     |
+Z               44     |
+X               45     |
+C               46     |
+V               47     |
+B               48     |
+N               49     |
+M               50     |
+,               51     |
+.               52     |
+/               53     |
+Shift (R)       54     |
+P*              55     |
+Alt (L)         56     |
+Space           57     |
+Caps Lock       58     |

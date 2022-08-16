@@ -44,9 +44,23 @@ cd ./bar_repos
 
 # Clone with HTTP
 git clone https://github.com/parrotshen/helloworld.git
+Username: username
+Password: token
 
 # Clone with SSH
 git clone git@github.com:parrotshen/helloworld.git
+
+
+[ Switch remote URLs between SSH and HTTPS ]
+
+# List the existing remotes
+git remote -v
+
+# Change remote's URL from SSH to HTTPS
+git remote set-url origin https://github.com/parrotshen/helloworld.git
+
+# Change remote's URL from HTTPS to SSH
+git remote set-url origin git@github.com:parrotshen/helloworld.git
 
 
 [ Sync. to the remote ]
@@ -85,12 +99,20 @@ git mv file_name
 git commit -m "comments"
 git commit -a -m "comments"
 
-# Discard changes
-git checkout file_name
-git checkout -- file_name
-
 # Show the commit history
 git log
+git rev-list HEAD
+
+# Show the current revision number (commit hash)
+git rev-parse HEAD
+git rev-parse --short HEAD
+
+# Switch to a specific branch
+git checkout commit_hash
+
+# Discard changes of file
+git checkout file_name
+git checkout -- file_name
 
 # Show the information of a remote repository
 git remote show origin
@@ -108,7 +130,7 @@ git reset --hard
 git reset --hard tag_name
 
 # Undo git add, remove before a commit
-git reset HEAD file_name
+git rm --cached file_name
 
 # Do a new commit to cancel the last commit
 git revert HEAD --no-edit

@@ -9,7 +9,8 @@ void dump(unsigned char *pData, int size)
     printf("(");
     for (i=0; i<size; i++)
     {
-        printf("%02x ", pData[i]);
+        printf("%02x", pData[i]);
+        if (i < (size - 1)) printf(" ");
     }
     printf(")\n");
 }

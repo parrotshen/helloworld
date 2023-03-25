@@ -1,29 +1,20 @@
 CC = gcc
 CFLAGS = -Wall
 
-APPS  = 8bits 64bits cast
-APPS += divide double.equal double.notequal
-APPS += pointer range shift
-APPS += wchar
+APPS = 8bits atoi bitfield cast pointer range string wchar
 
 all: $(APPS)
 
 8bits: 8bits.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-64bits: 64bits.c
+atoi: atoi.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+bitfield: bitfield.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 cast: cast.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-divide: divide.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-double.equal: double.c
-	$(CC) $(CFLAGS) -D__TOLERANCE__ -lm -o $@ $<
-
-double.notequal: double.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 pointer: pointer.c
@@ -32,7 +23,7 @@ pointer: pointer.c
 range: range.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-shift: shift.c
+string: string.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 wchar: wchar.c

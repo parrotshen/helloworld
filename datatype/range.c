@@ -5,6 +5,8 @@
 
 int main(void)
 {
+    double    maxdb, mindb;
+    float     maxft, minft;
     uint64_t  max64, min64;
     uint32_t  max32, min32;
     uint16_t  max16, min16;
@@ -58,6 +60,16 @@ int main(void)
     max64 = min64 - 1;
     printf("   signed 64-bit | %lld  | %lld\n", (int64_t)max64, (int64_t)min64);
     printf("                 | 0x%llx   | 0x%llx\n", max64, min64);
+    printf("-----------------+----------------------+----------------------\n");
+    *((uint32_t *)(&minft)) = 0xff7fffff;
+    *((uint32_t *)(&maxft)) = 0x7f7fffff;
+    printf("    float 32-bit | %e         | %e\n", maxft, minft);
+    printf("                 | 0x%x           | 0x%x\n", *((uint32_t *)(&maxft)), *((uint32_t *)(&minft)));
+    printf("-----------------+----------------------+----------------------\n");
+    *((uint64_t *)(&mindb)) = 0xffefffffffffffffLL;
+    *((uint64_t *)(&maxdb)) = 0x7fefffffffffffffLL;
+    printf("   double 64-bit | %e        | %e\n", maxdb, mindb);
+    printf("                 | 0x%llx   | 0x%llx\n", *((uint64_t *)(&maxdb)), *((uint64_t *)(&mindb)));
     printf("===============================================================\n");
     printf("\n");
 

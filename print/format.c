@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
                 printf("[7m%016d[27m\n\n", 1);
                 printf("printf(\"[1;31m%%#x[0m\\n\", 6512);\n");
                 printf("[7m%#x[27m\n\n", 6512);
+                printf("printf(\"[1;31m%%e[0m\\n\", 168.01234567);\n");
+                printf("[7m%e[27m\n\n", 168.01234567);
                 break;
             }
             case 'p':

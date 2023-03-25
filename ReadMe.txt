@@ -50,6 +50,9 @@ Password: token
 # Clone with SSH
 git clone git@github.com:parrotshen/helloworld.git
 
+# Clone a private repository
+git clone https://username@github.com/username/repository-name.git
+
 
 [ Switch remote URLs between SSH and HTTPS ]
 

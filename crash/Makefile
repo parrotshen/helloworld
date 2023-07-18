@@ -4,6 +4,7 @@ APPS  = segment_fault
 APPS += stack_overflow
 APPS += buffer_overflow
 APPS += array_index_exceed
+APPS += malloc_illegal_access
 APPS += bus_error
 APPS += free_invalid_pointer
 APPS += double_free
@@ -25,6 +26,9 @@ buffer_overflow: buffer_overflow.c
 	$(CC) -Wall $< -o $@
 
 array_index_exceed: array_index_exceed.c
+	$(CC) -Wall $< -o $@
+
+malloc_illegal_access: malloc_illegal_access.c
 	$(CC) -Wall $< -o $@
 
 bus_error: bus_error.c

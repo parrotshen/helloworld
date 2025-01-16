@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-inline int test1(int i)
+static inline int test1(int i)
 {
     int j = 0;
 
 _LABEL_T11:
-    j = i * i;
+    j = i + i;
 
 _LABEL_T12:
     printf("_LABEL_T11 at [1;33m%p[0m\n", &&_LABEL_T11);
@@ -28,7 +28,7 @@ _LABEL_T22:
 
 int main(void)
 {
-    int i = 9;
+    int i = 168;
 
 _LABEL_M01:
     test1( i );

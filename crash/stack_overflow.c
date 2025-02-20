@@ -17,7 +17,7 @@ void stack_overflow(int n)
     /* each call will consume 4000000+ bytes stack memory */
     int array[1000000];
 
-    printf("%d) stack size %d\n", n, stack_size());
+    printf("%d) stack size %ld\n", n, stack_size());
 
     array[0] = n;
 

@@ -12,6 +12,8 @@ APPS += free_invalid_next_size
 APPS += out_of_memory
 APPS += divide_by_zero
 APPS += variable_lifetime
+APPS += assert_causes_abort
+APPS += broken_pipe
 
 
 all: $(APPS)
@@ -51,6 +53,12 @@ divide_by_zero: divide_by_zero.c
 
 variable_lifetime: variable_lifetime.c
 	$(CC) -Wall -g $< -o $@
+
+assert_causes_abort: assert_causes_abort.c
+	$(CC) -Wall -g $< -o $@
+
+broken_pipe: broken_pipe.c
+	$(CC) -Wall -lpthread $< -o $@
 
 clean:
 	rm -f $(APPS)

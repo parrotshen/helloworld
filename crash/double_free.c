@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-void dump(const void *addr, unsigned int size)
+void dump(void *addr, unsigned int size)
 {
-    unsigned char *p = (unsigned char *)addr;
+    unsigned char *p = addr;
     unsigned int   i;
 
     if (p == NULL)
@@ -22,7 +22,7 @@ void dump(const void *addr, unsigned int size)
 
         if ((i % 16) == 0)
         {
-            printf("%08x :", (int)(p + i));
+            printf("%08x :", (int)(unsigned long)(p + i));
         }
         printf(" %02x", p[i]);
     }

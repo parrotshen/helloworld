@@ -52,14 +52,14 @@ int main(void)
     printf("-----------------+----------------------+----------------------\n");
     memset(&min64, 0x00, sizeof( uint64_t ));
     memset(&max64, 0xff, sizeof( uint64_t ));
-    printf(" unsigned 64-bit | %llu | %llu\n", max64, min64);
-    printf("                 | 0x%llx   | 0x%016llx\n", max64, min64);
+    printf(" unsigned 64-bit | %lu | %lu\n", max64, min64);
+    printf("                 | 0x%lx   | 0x%016lx\n", max64, min64);
     printf("-----------------+----------------------+----------------------\n");
     shift = (8 * sizeof( int64_t )) - 1;
     min64 = (0x1LL << shift);
     max64 = min64 - 1;
-    printf("   signed 64-bit | %lld  | %lld\n", (int64_t)max64, (int64_t)min64);
-    printf("                 | 0x%llx   | 0x%llx\n", max64, min64);
+    printf("   signed 64-bit | %ld  | %ld\n", (int64_t)max64, (int64_t)min64);
+    printf("                 | 0x%lx   | 0x%lx\n", max64, min64);
     printf("-----------------+----------------------+----------------------\n");
     *((uint32_t *)(&minft)) = 0xff7fffff;
     *((uint32_t *)(&maxft)) = 0x7f7fffff;
@@ -69,7 +69,7 @@ int main(void)
     *((uint64_t *)(&mindb)) = 0xffefffffffffffffLL;
     *((uint64_t *)(&maxdb)) = 0x7fefffffffffffffLL;
     printf("   double 64-bit | %e        | %e\n", maxdb, mindb);
-    printf("                 | 0x%llx   | 0x%llx\n", *((uint64_t *)(&maxdb)), *((uint64_t *)(&mindb)));
+    printf("                 | 0x%lx   | 0x%lx\n", *((uint64_t *)(&maxdb)), *((uint64_t *)(&mindb)));
     printf("===============================================================\n");
     printf("\n");
 

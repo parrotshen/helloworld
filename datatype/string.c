@@ -31,27 +31,27 @@ int main(int argc, char *argv[])
 
     printf("s1:\n");
     printf(" \"%s\"\n", s1);
-    printf(" sizeof(*s1) = %d\n", sizeof(*s1));
+    printf(" sizeof(*s1) = %ld\n", sizeof(*s1));
     dump((void *)s1, 16);
 
     printf("s2:\n");
     printf(" \"%s\"\n", s2);
-    printf(" sizeof(*s2) = %d\n", sizeof(*s2));
+    printf(" sizeof(*s2) = %ld\n", sizeof(*s2));
     dump((void *)s2, 16);
 
     printf("s3:\n");
     printf(" \"%s\"\n", (*s3));
-    printf(" sizeof(*s3) = %d\n", sizeof(*s3));
+    printf(" sizeof(*s3) = %ld\n", sizeof(*s3));
     dump((void *)(*s3), 16);
 
     printf("s4:\n");
     printf(" \"%s\"\n", s4);
-    printf(" sizeof(s4) = %d\n", sizeof(s4));
+    printf(" sizeof(s4) = %ld\n", sizeof(s4));
     dump((void *)s4, 16);
 
     printf("s5:\n");
     printf(" \"%s\"\n", s5);
-    printf(" sizeof(s5) = %d\n", sizeof(s5));
+    printf(" sizeof(s5) = %ld\n", sizeof(s5));
     dump((void *)s5, 16);
 
     return 0;

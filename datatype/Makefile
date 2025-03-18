@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 
-APPS = 8bits atoi bitfield cast pointer range string wchar
+APPS = 8bits atoi bitfield bool cast pointer range string wchar
 
 all: $(APPS)
 
@@ -12,6 +12,9 @@ atoi: atoi.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 bitfield: bitfield.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+bool: bool.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 cast: cast.c

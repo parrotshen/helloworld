@@ -19,11 +19,11 @@ int main(void)
     ((char*)ptr)[127] = 0x00;
 
     printf("\n");
-    printf("sizeof( void*          ) = %d\n", sizeof( void* ));
-    printf("sizeof( unsigned long  ) = %d\n", sizeof( unsigned long ));
-    printf("sizeof( ptr            ) = %d\n", sizeof( ptr ));
-    printf("sizeof( *((char*)ptr)  ) = %d\n", sizeof( *((char*)ptr) ));
-    printf("sizeof( *((tData*)ptr) ) = %d\n", sizeof( *((tData*)ptr) ));
+    printf("sizeof( void*          ) = %ld\n", sizeof( void* ));
+    printf("sizeof( unsigned long  ) = %ld\n", sizeof( unsigned long ));
+    printf("sizeof( ptr            ) = %ld\n", sizeof( ptr ));
+    printf("sizeof( *((char*)ptr)  ) = %ld\n", sizeof( *((char*)ptr) ));
+    printf("sizeof( *((tData*)ptr) ) = %ld\n", sizeof( *((tData*)ptr) ));
     printf("\n");
 
     free( (void*)ptr );

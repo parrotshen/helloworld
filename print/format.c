@@ -23,6 +23,13 @@ int main(int argc, char *argv[])
                 printf("[7m%-16s[27m\n\n", "Hello");
                 printf("printf(\"[1;31m%%016d[0m\\n\", 1);\n");
                 printf("[7m%016d[27m\n\n", 1);
+                printf("printf(\"[1;31m%%8.3f[0m\\n\", 1);\n");
+                printf("[7m%8.3f[27m\n", 1234.678111);
+                printf("[7m%8.3f[27m\n", 123.678111);
+                printf("[7m%8.3f[27m\n", 12.678111);
+                printf("[7m%8.3f[27m\n", 1.678111);
+                printf("[7m%8.3f[27m\n", .678111);
+                printf("\n");
                 printf("printf(\"[1;31m%%#x[0m\\n\", 6512);\n");
                 printf("[7m%#x[27m\n\n", 6512);
                 printf("printf(\"[1;31m%%e[0m\\n\", 168.01234567);\n");

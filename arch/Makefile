@@ -5,9 +5,10 @@ LD = $(CROSS)ld
 NM = $(CROSS)nm
 SIZE = $(CROSS)size
 OBJDUMP = $(CROSS)objdump
+STRIP = $(CROSS)strip
 
 
-all: helloC helloS test memory stack
+all: helloC helloS test memory pagemap stack
 
 
 helloC: helloC.o
@@ -47,6 +48,13 @@ memory: memory.c
 	@echo
 
 
+pagemap: pagemap.c
+	@echo "[BUILD] $@"
+	$(CC) -Wall $< -o $@
+	$(STRIP) $@
+	@echo
+
+
 stack: stack.c
 	@echo "[BUILD] $@"
 	$(CC) -Wall -m32 -g $< -o $@
@@ -60,6 +68,7 @@ clean:
 	rm -f helloS helloS.o
 	rm -f test
 	rm -f memory
+	rm -f pagemap
 	rm -f stack
 
-.PHONY: helloC helloS test memory stack
+.PHONY: helloC helloS test memory pagemap stack

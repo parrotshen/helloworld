@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <locale.h>
 
 int main(int argc, char *argv[])
 {
@@ -8,12 +9,12 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        printf("Usage: format [-f] [-p] [-w WIDTH]\n\n");
+        printf("Usage: format [-f] [-l] [-p] [-w WIDTH]\n\n");
         return 0;
     }
 
     opterr = 0;
-    while ((ch=getopt(argc, argv, "fpw:")) != -1)
+    while ((ch=getopt(argc, argv, "flpw:")) != -1)
     {
         switch ( ch )
         {
@@ -36,6 +37,19 @@ int main(int argc, char *argv[])
                 printf("[7m%e[27m\n\n", 168.01234567);
                 break;
             }
+            case 'l':
+            {
+                printf("setlocale(LC_ALL, \"\");\n");
+                setlocale(LC_ALL, "");
+                printf("\n");
+                printf("printf(\"[1;31m%%'d[0m\\n\", 1000);\n");
+                printf("[7m%'d[27m\n\n", 1000);
+                printf("printf(\"[1;31m%%'d[0m\\n\", 1000000);\n");
+                printf("[7m%'d[27m\n\n", 1000000);
+                printf("printf(\"[1;31m%%'d[0m\\n\", 1000000000);\n");
+                printf("[7m%'d[27m\n\n", 1000000000);
+                break;
+            }
             case 'p':
             {
                 printf("printf(\"[1;31m%%p[0m\\n\", &ch);\n");
@@ -46,10 +60,10 @@ int main(int argc, char *argv[])
             {
                 int width = atoi( optarg );
                 printf(
-                    "printf(\"[1;31m%%.*s[0m\\n\", [1;33m%d[0m, \"123456789\");\n",
+                    "printf(\"[1;31m%%.*s[0m\\n\", [1;33m%d[0m, \"1234567890\");\n",
                     width
                 );
-                printf("[7m%.*s[27m\n\n", width, "123456789");
+                printf("[7m%.*s[27m\n\n", width, "1234567890");
                 break;
             }
             default:
